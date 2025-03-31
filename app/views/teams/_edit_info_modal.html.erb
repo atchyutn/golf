@@ -1,0 +1,35 @@
+<div class="modal fade" id="editInfo" tabindex="-1" aria-labelledby="editInfoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editInfoLabel">Edit information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <%# We must show only home courses at the basis of selected club %>
+      <% if current_user.team %>
+        <%= form_with model: current_user.team, url: team_update_home_course_path(current_user.team), method: :put, remote: true do |f|  %>
+          <div class="modal-body">
+            <!-- Home course select -->
+            <div class="mb-4">
+              <label for="homeCourse" class="form-label fw-semibold">Home course</label>
+              <select class="form-select" name="home_course_id" id="homeCourse" >
+                <option value="" selected disabled>Select home course</option>
+                <% HomeCourse.pluck(:name, :id).each do |name, id| %>
+                  <option value="<%= id %>" <%= 'selected' if current_user&.team&.home_course&.id == id %>><%= name %></option>
+                <% end %>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <%= f.submit "Save", class: "btn greenBtn " %>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="modal-body">
+          <p>No team associated with the user.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

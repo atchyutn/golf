@@ -1,0 +1,56 @@
+$fa-font-path: ".";
+@import "rails_admin/src/rails_admin/styles/base";
+
+.devise-form-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.devise-form-container .devise-form-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.devise-form-container input.devise-form-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.devise-form-container input.devise-form-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.devise-form-container button.devise-form-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.devise-form-container button.devise-form-button:hover {
+  background-color: #0056b3;
+}
+
+.devise-form-container a.devise-form-switch-link {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.devise-form-container a.devise-form-switch-link:hover {
+  text-decoration: underline;
+}

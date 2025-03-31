@@ -1,0 +1,32 @@
+<% scores = match.scores_csv.first.split('-').map(&:to_i) rescue nil %>
+<% if (max_val.nil?) || (max_val.present? && max_val <= 0) %>
+	<div class="team-status up"><span>AS</span></div>
+<% elsif max_val == team.final_standing && max_val != 0 %>
+	<div class="team-status up"><span><%= team.final_standing %></span>UP</div>
+<% elsif scores.present? && (match.teams.pluck(:final_standing).map(&:to_i).max <= 0) %>
+	<%if scores[0] > scores[1] %>
+		<%
+			team1 = Team.find_by(participant_id: match.player1_id)
+			if team1.nil?
+				team2 = Team.find_by(participant_id: match.player2_id)
+				team1_id = match.teams.pluck(:id) - [team2.id]
+				team1 = Team.find_by(id: team1_id)
+			end
+		%>
+		<% if team1 == team %>
+			<div class="up2"><span><%= scores[0] %></span>UP</div>
+		<% end %>
+	<% elsif scores[0] < scores[1] %>
+		<%
+			team2 = Team.find_by(participant_id: match.player2_id)
+			if team2.nil?
+				team1 = Team.find_by(participant_id: match.player1_id)
+				team2_id = match.teams.pluck(:id) - [team1.id]
+				team2 = Team.find_by(id: team2_id)
+			end
+		%>
+		<% if team == team2 %>
+			<div class="team-status up"><span><%= scores[1] %></span>UP</div>
+		<% end %>
+	<% end %>
+<% end %>

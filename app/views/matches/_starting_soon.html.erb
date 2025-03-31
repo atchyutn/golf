@@ -1,0 +1,19 @@
+<div class="row justify-content-center">
+	<div class="col-12">
+		<div class="card soonCard">
+			<div class="iconBox">
+				<%= image_tag 'tournament-soon.svg', class: 'icon', alt: '' %>
+			</div>
+			<h2>Tournament Not Started</h2>
+			<p>Please ensure your team profiles are completed and up to date,
+			You can invite teammate or learn more about the tournament</p>
+			<a href="/teams" class="btn whiteBtn">Setup your team</a>
+			<!-- <a href="/" class="btn greenBtn">Finish payment</a> -->
+			<% if !current_user.team.completed? %>
+				<%= form_with url: create_checkout_session_path, method: :post, class: "pay-now-form", data: { turbo: false } do |form| %>
+          <%= form.submit "Finish payment", class: "btn greenBtn" %>
+        <% end %>
+    <% end %>
+		</div>
+	</div>
+</div>

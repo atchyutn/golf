@@ -1,0 +1,27 @@
+<div class="modal fade" id="invitePlayer" tabindex="-1" aria-labelledby="invitePlayerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="invitePlayerLabel">Invite player</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_with model: Invitation.new, url: invitations_path, method: :post do |f| %>
+        <div class="modal-body">
+          <!-- Home course select -->
+          <div class="mb-4">
+            <label for="homeCourse" class="form-label fw-semibold">Email</label>
+            <div id="user-present" style="color: #d91212;" ></div>
+            <%= f.email_field :invitee_email, class: "form-control" %>
+            <span class="invite-sent" style="color: red" ></span>
+          </div>
+          <%= f.hidden_field :player_type, id: "playerTypeField" %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.hidden_field :team_id, value: current_user.team.id %>
+        </div>
+        <div class="modal-footer">
+          <%= f.submit 'Invite', class: "btn greenBtn", id: 'invite_form' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

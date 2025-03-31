@@ -1,0 +1,39 @@
+<section class="banner">
+  <%= image_tag 'bannerImg.png', alt: '', class: 'bg' %>
+  <div class="inner">
+    <div class="sub">View your matches here</div>
+    <h1 class="title" id="context-content">All matches</h1>
+  </div>
+</section>
+<div class="matchesWrap">
+  <div class="container maxWidth888">
+    <%= render partial: 'layouts/tabs', locals: { active_class: 'active', page: 'match',match_started: false } %>
+    <% if flash[:alert].present? && @match.home_course.nil? %>
+      <div class="alert alert-danger" role="alert">
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <% if !current_user.team.completed? %>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card statusMsg">
+            <div class="msgWrap">
+              <i class="bx bx-info-circle"></i>
+              <div class="info">
+                <div class="title">Your Payment has not been updated! Please contact admin</div>
+              </div>
+            </div>
+            <%
+=begin%>
+ <%= form_with url: create_checkout_session_path, method: :post, class: "pay-now-form", data: { turbo: false } do |form| %>
+              <%= form.submit "Pay now", class: "btn btnSmall greenBtn" %>
+            <% end %> 
+<%
+=end%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= render partial: 'matches/edit' %>
+  </div>
+</div>

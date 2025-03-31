@@ -1,0 +1,301 @@
+.signUpWrap {
+  min-height: calc(100vh - 89px);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.signUpWrap.signUpBg {
+  background: url(images/signup-bg.png) center no-repeat;
+  background-size: cover;
+}
+.signUpWrap video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  z-index: -1;
+}
+.signUpWrap .signupCard {
+  color: #fff;
+  padding: 48px 0;
+  border-radius: 8px;
+  font-family: "Montserrat", sans-serif;
+}
+.signUpWrap .signupCard .avatarTrustWrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 48px;
+}
+.signUpWrap .signupCard .avatars {
+  display: flex;
+  margin-right: 8px;
+  padding-left: 8px;
+}
+.signUpWrap .signupCard .avatars .avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1.5px solid #fff;
+  margin-left: -8px;
+  background-size: cover;
+  background-position: center;
+}
+.signUpWrap .signupCard .avatars .avatar:nth-child(1) {
+  background-image: url("images/avatar-1.jpeg");
+}
+.signUpWrap .signupCard .avatars .avatar:nth-child(2) {
+  background-image: url("images/avatar-2.jpeg");
+}
+.signUpWrap .signupCard .avatars .avatar:nth-child(3) {
+  background-image: url("images/avatar-1.jpeg");
+}
+.signUpWrap .signupCard .avatars .avatar:nth-child(4) {
+  background-image: url("images/avatar-2.jpeg");
+}
+.signUpWrap .signupCard .trustedText {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.signUpWrap .signupCard .mainTitle {
+  font-size: 48px;
+  line-height: 52px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+.signUpWrap .signupCard .entryFee {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  opacity: 70%;
+}
+.signUpWrap .signupCard .emailSignup {
+  display: flex;
+  margin-bottom: 12px;
+  max-width: 540px;
+}
+.signUpWrap .signupCard .emailSignup .emailInput {
+  flex-grow: 1;
+  border: none;
+  padding: 16px;
+  border-radius: 8px 0 0 8px;
+  font-size: 16px;
+}
+.signUpWrap .signupCard .emailSignup .signupBtn {
+  padding: 16px;
+  background-color: #00f1c8;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+}
+.signUpWrap .signupCard .emailSignup .signupBtn:hover {
+  background-color: #00cdaa;
+  border-color: #00cdaa;
+}
+.signUpWrap .signupCard .orSeparator {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  opacity: 70%;
+}
+.signUpWrap .signupCard .googleSignup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 40px;
+  background-color: #fff;
+  color: #333333;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.signUpWrap .signupCard .googleSignup .google-icon {
+  margin-right: 12px;
+}
+.signUpWrap .signInTitle {
+  margin-bottom: 40px;
+}
+.signUpWrap .googleBtn {
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.0509803922);
+  border: 1px solid #d0d5dd;
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  color: #333333;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+.signUpWrap .googleBtn::before {
+  content: "";
+  height: 24px;
+  width: 24px;
+  background: url(images/googl-icon.svg) center no-repeat;
+  display: block;
+  margin-right: 12px;
+}
+.signUpWrap .orLine {
+  position: relative;
+  text-align: center;
+}
+.signUpWrap .orLine::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid #d0d5dd;
+  top: 50%;
+  left: 0;
+}
+.signUpWrap .orLine span {
+  background: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 19.6px;
+  padding: 0 10px;
+  position: relative;
+  margin: 0 auto;
+}
+.signUpWrap .signUpLink {
+  border-top: 1px solid #d0d5dd;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 19.6px;
+  text-align: center;
+  color: #939393;
+}
+.signUpWrap .signUpLink a {
+  color: #333333;
+  text-decoration: none;
+}
+.signUpWrap .signMaxWidth {
+  max-width: 392px;
+}
+
+.card.borderCard {
+  border: 1px solid #d0d5dd;
+  background-color: #fff;
+  border-radius: 16px;
+}
+.card.borderCard .card-body {
+  padding: 24px;
+}
+
+h2 {
+  font-weight: bold;
+}
+
+.form-label {
+  color: #333333;
+  font-weight: 600;
+}
+
+.form-select,
+.form-control {
+  background-color: #f9fafb;
+  border-radius: 8px;
+  padding: 9px 13px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.btn-primary {
+  background-color: #00f1c8;
+  border-color: #00f1c8;
+  color: #333;
+}
+
+.btn-primary:hover {
+  background-color: #00cdaa;
+  border-color: #00cdaa;
+}
+
+::-moz-placeholder {
+  color: #667085;
+  opacity: 1;
+}
+
+::placeholder {
+  color: #667085;
+  opacity: 1;
+}
+
+.input-group-text {
+  background-color: #f9fafb;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+}
+
+.card-title {
+  color: #333;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.card-text {
+  color: #000;
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.card-text a {
+  font-weight: 700;
+  color: #141414;
+}
+
+.btn-primary.bg-teal {
+  color: #333;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@media (max-width: 991px) {
+  .signUpWrap .signupCard .avatarTrustWrap {
+    margin-bottom: 24px;
+  }
+  .signUpWrap .signupCard .mainTitle {
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 18px;
+  }
+  .signUpWrap .signupCard .emailSignup {
+    flex-direction: column;
+    align-items: center;
+  }
+  .signUpWrap .signupCard .emailSignup .emailInput {
+    border-radius: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  .signUpWrap .signupCard .emailSignup .signupBtn {
+    border-radius: 8px;
+    width: 100%;
+  }
+  .signUpWrap .signupCard .orSeparator {
+    text-align: center;
+  }
+  .signUpWrap .signupCard .googleSignup {
+    display: block;
+    margin: 0 auto;
+  }
+}/*# sourceMappingURL=sign-up.css.map */

@@ -1,0 +1,245 @@
+ <div class="card select-tees-container">
+		<div class="cardHeader profileHeader">
+			<div class="left">
+				<h3>Select Handicap & Tee</h3>
+			</div>
+		</div>
+		<div class="profileWrap">
+  
+<%= form_with model: @match, url: match_path(@match), method: :put, id: 'match_form', remote: true do |f| %>
+  <%= f.hidden_field :id %>
+  <%= f.hidden_field :match_time %>
+
+  <% @match.teams.each do |team| %>
+    <h5 class="mb-3"><%= team.name %></h5>
+    <% team.players.where(player_type: ['player', 'captain']).each do |player| %>
+      <div class="player-tee-selection">
+        <div class="player-info col-4">
+          <p class="name"><%= player.full_name %></p>
+          <div class="player-details">
+            <span class="handicap">
+              <%= text_field_tag "player_handicaps[#{player.id}]", player.handicap, class: 'form-control handicap-input', placeholder: 'Enter handicap', style: 'display: none;' %>
+              <span class="handicap-display" style="display: inline;">Hcp: <%= player.handicap %></span>
+            </span>
+            <button class="edit-icon" onclick="toggleHandicapInput(this)">
+              <i class="bx bx-pencil"></i>
+            </button>
+          </div>
+        </div>
+        <%= select_tag "player_tees[#{player.id}]",
+          options_for_select(@match.home_course.tees.where("COALESCE(slope_rating, '') != ?", 'N/D').pluck(:name), player.users_tees.find_by(match_id: @match.id)&.tee&.name),
+          { class: 'form-select' }
+        %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="buttonsWrap d-flex justify-content-end">
+    <%= f.submit 'Save', class: "btn greenBtn save", id: 'match_handicap_form' %>
+  </div>
+<% end %>
+
+
+</div>
+
+	<%# Match Information %>
+ <%
+=begin%>
+ <div class="card">
+		<div class="cardHeader profileHeader">
+			<div class="left">
+				<div class="info">
+				<div class="name">Match information</div>
+				<% if current_user.home_team_captain? %>
+					<div class="sub">
+						Please confirm the course with the other team before editing.
+					</div>
+				<% end %>
+				</div>
+			</div>
+			<% if current_user.home_team_captain? %>
+				<div class="right">
+				<a
+					href="#"
+					class="btn whiteBtn iconBtn btnSmall edit-match"
+					data-bs-toggle="modal"
+					data-bs-target="#matchInfo"
+				>
+					<i class="bx bx-pencil"></i>
+					Edit</a
+				>
+				</div>
+			<% end %>
+		</div>
+		<%= render partial: 'matches/match_information', locals: { key: @match.status, key_match: @match, display_text: true } %>
+	</div>  
+<%
+=end%>
+
+
+
+
+
+<style>
+  .player-tee-selection {
+    margin-bottom: 15px;
+  }
+
+  .select-tees-container h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.select-tees-container .round-info {
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.9375rem;
+  background-color: #fff;
+  border: none;
+}
+.select-tees-container .round-info .date-info {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.select-tees-container .round-info .play-by-grey {
+  background-color: rgba(208, 213, 221, 0.3019607843);
+  color: #000;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.select-tees-container .course-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: white;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+}
+.select-tees-container .course-selector .icon {
+  font-size: 1.25rem;
+}
+.select-tees-container .course-selector .form-select {
+  border: none;
+  padding: 0;
+  font-size: 0.9375rem;
+  background-position: right center;
+  width: 100%;
+}
+.select-tees-container .course-selector .form-select:focus {
+  box-shadow: none;
+}
+.select-tees-container .section-header {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+.select-tees-container .section-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+.select-tees-container .tee-selection-section {
+  margin-bottom: 1.5rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 16px;
+}
+.select-tees-container .player-tee-selection {
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.select-tees-container .player-tee-selection .player-info {
+  text-align: left;
+}
+.select-tees-container .player-tee-selection .player-info .player-details {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.select-tees-container .player-tee-selection .player-info .name {
+  font-weight: 500;
+  font-size: 0.9375rem;
+  margin-bottom: 0;
+}
+.select-tees-container .player-tee-selection .player-info .handicap {
+  color: #666;
+  font-size: 0.875rem;
+}
+.select-tees-container .player-tee-selection .player-info .edit-icon {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  opacity: 0.6;
+}
+.select-tees-container .player-tee-selection .player-info .edit-icon:hover {
+  opacity: 0.8;
+}
+.select-tees-container .player-tee-selection .form-select {
+  border-color: #d0d5dd;
+  font-size: 0.9375rem;
+  padding: 0.5rem 0.75rem;
+}
+.select-tees-container .btn-course-info {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2509803922);
+  color: #575a54;
+  text-decoration: none;
+  font-size: 0.875rem;
+  padding: 15px 20px;
+}
+.select-tees-container .btn-course-info:hover {
+  color: #575a54;
+  text-decoration: underline;
+}/*# sourceMappingURL=select-tees.css.map */
+</style>
+
+
+
+<script>
+  function toggleHandicapInput(button) {
+    const playerSelection = button.closest('.player-tee-selection');
+    const handicapInput = playerSelection.querySelector('.handicap-input');
+    const handicapDisplay = playerSelection.querySelector('.handicap-display');
+    const saveButton = playerSelection.querySelector('save');
+
+    if (handicapInput.style.display === 'none') {
+      handicapInput.style.display = 'inline';
+      handicapDisplay.style.display = 'none';
+      handicapInput.focus();
+      saveButton.disabled = false;
+  
+    } else {
+      handicapInput.style.display = 'none';
+      handicapDisplay.style.display = 'inline';
+    }
+  }
+
+  // Add event listener for Enter key to save the handicap
+  document.querySelectorAll('.handicap-input').forEach(input => {
+    input.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent form submission
+        const playerSelection = this.closest('.player-tee-selection');
+        const handicapDisplay = playerSelection.querySelector('.handicap-display');
+        const saveButton = document.getElementsByClassName('save')[0];
+        handicapDisplay.textContent = `Hcp: ${this.value}`;
+        saveButton.disabled = false;
+
+        
+        // Hide the input field
+        this.style.display = 'none';
+        handicapDisplay.style.display = 'inline';
+      }
+    });
+  });
+</script>

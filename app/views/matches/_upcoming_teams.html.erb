@@ -1,0 +1,43 @@
+<div class="teamWrap upcoming">
+  <% key_match.teams.each do |team| %>
+	  <div class="teamName">Team <%= const %><% if team.home %><span class="tag home">Home</span><% end %></div>
+	  <% const += 1 %>
+	  <div class="row teamRow">
+	  	<% captains = team.players.select { |player| player.captain? } %>
+	  	<% regular_players = team.players.select { |player| player.player? } %>
+	  	<% reserved_players = team.players.select { |player| player.reserved_player? } %>
+	    <% (captains + regular_players + reserved_players).each do |player| %>
+		    <% unless player.reserved_player? %>
+			    <div class="team col-12 col-md-6">
+			      <div class="box">
+			        <div class="left">
+			          <div class="profilePic">
+			            <% if player.image.attached? %>
+			            	<%= image_tag player.image %>
+			            <% else %>
+			            	<%= image_tag 'profile-pic-1.jpeg', alt: '' %>
+			            <% end %>
+			          </div>
+			          <div class="info me-auto">
+			            <div class="name"><%= player.full_name %></div>
+			            <div class="hcp">Hcp: <%= player.handicap %></div>
+			          </div>
+			        </div>
+			        <% if player.present? && player.captain? %>
+			        	<div class="tag captain">Captain</div>
+			        <% end %>
+			      </div>
+			    </div>
+			    <% if match_info %>
+			    	<%# place contact info code here %>
+			    <% end %>
+		    <% end %>
+	    <% end %>
+	  </div>
+  <% end %>
+  <% unless match_info %>
+	  <div class="buttonsWrap">
+	    <%= link_to 'Match details', edit_match_path(key_match.id), class: "btn greenBtn", onclick: "window.location.href = this.href; return false;" %>
+	  </div>
+	<% end %>
+</div>

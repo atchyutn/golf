@@ -1,0 +1,77 @@
+<div class="card">
+  <div class="cardHeader">
+    <div class="left">
+      <h2>Team</h2>
+    </div>
+    <div class="right">
+     
+    </div>
+  </div>
+
+  <div class="teamWrap">
+    <div class="teamRow row">
+      <% team = current_user.team %>
+
+      <!-- Captain -->
+      <div class="team col-12 col-md-6">
+        <div class="teamName">
+          Player 1
+          <% if team && team.captain == current_user %>
+            (You)
+          <% end %>
+        </div>
+            <%= render partial: 'teams/team_member_box', locals: { team_member: current_user.team&.captain, player_type: 'captain' } if current_user.team %>
+      </div>
+
+      <!-- Player 2 -->
+      <div class="team col-12 col-md-6">
+        <div class="teamName">
+          Player 2
+          <% player2 = team&.players&.find_by(player_type: 'player') || team&.players&.where(player_type: nil)&.last %>
+          <% if player2 == current_user %>
+            (You)
+          <% end %>
+        </div>
+            <% if current_user.team && current_user.captain? && current_user.team.players.where(player_type: 'player').last.present? %>
+              <%= render partial: 'teams/edit_player_icon', locals: { player_email: current_user.team.players.where(player_type: 'player').last.email } %>
+        <% end %>
+        <%= render partial: 'teams/team_member_box', locals: { team_member: current_user.team.players.where(player_type: 'player').last, player_type: 'player' } if current_user.team %>
+
+      </div>
+    </div>
+
+    <div class="teamRow row">
+      <!-- Reserve Player 1 -->
+      <div class="team col-12 col-md-6">
+        <div class="teamName">
+          Reserve player 1
+              <% if current_user.team && current_user.team.players.where(player_type: 'reserved_player').first == current_user %>
+            (You)
+          <% end %>
+        </div>
+            <% if current_user.team && current_user.captain? && current_user.team.players.where(player_type: 'reserved_player').first.present? %>
+              <%= render partial: 'teams/edit_player_icon', locals: { player_email: current_user.team.players.where(player_type: 'reserved_player').first.email } %>
+        <% end %>
+            <%= render partial: 'teams/team_member_box', locals: { team_member: current_user.team.players.where(player_type: 'reserved_player').first, player_type: 'reserved_player' } if current_user.team %>
+      </div>
+
+      <!-- Reserve Player 2 -->
+      <div class="team col-12 col-md-6">
+        <div class="teamName">
+          Reserve player 2
+              <% if current_user.team && current_user.team.players.where(player_type: 'reserved_player').second == current_user %>
+            (You)
+          <% end %>
+        </div>
+            <% if current_user.team && current_user.captain? && current_user.team.players.where(player_type: 'reserved_player').second.present? %>
+              <%= render partial: 'teams/edit_player_icon', locals: { player_email: current_user.team.players.where(player_type: 'reserved_player').second.email } %>
+        <% end %>
+            <%= render partial: 'teams/team_member_box', locals: { team_member: current_user.team.players.where(player_type: 'reserved_player').second, player_type: 'reserved_player' } if current_user.team %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'teams/edit_info_modal' %>
+<%= render 'teams/invite_player_modal' %>
+<%= render 'teams/edit_player_modal' %>

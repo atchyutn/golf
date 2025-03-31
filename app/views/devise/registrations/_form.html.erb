@@ -1,0 +1,30 @@
+<div class="signUpWrap">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-xl-4 col-lg-6 col-md-8 signMaxWidth">
+      <%if flash[:alert].present?%>
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
+        </div>
+      <%end%>
+        <div class="text-center mb-4">
+          <h2>Personal Information</h2>
+        </div>
+
+        <div class="card borderCard">
+          <div class="card-body">
+          <%= form_for(resource, as: resource_name, url: form_url, method: form_method) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+            <%= render partial: 'devise/registrations/personal_information', locals: { f: f, email: email, provider: @provider } %>
+
+            <div class="d-grid">
+              <%= f.submit :value => "create account", :class => 'btn btn-primary btn-lg rounded-pill bg-teal' %>
+            </div>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

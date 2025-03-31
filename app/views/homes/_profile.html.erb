@@ -1,0 +1,79 @@
+<div id='profile-container' >
+  <div class="col-12">
+    <div class="card">
+      <div class="cardHeader profileHeader">
+        <div class="left">
+          <div class="profilePic">
+            <% if current_user.image.attached? %>
+              <%= image_tag current_user.image %>
+            <% else %>
+              <%= image_tag 'profile-pic-1.jpeg', alt: '' %>
+            <% end %>
+            <label for="file-upload" class="custom-file-upload">
+              <i class="bx bx-upload"></i>
+            </label>
+            <input id="file-upload" type="file" />
+          </div>
+          <div class="info">
+            <div class="name profileName"><%= current_user.full_name %></div>
+            <div class="email"><%= current_user.email %></div>
+          </div>
+        </div>
+        <!-- Will be added soon currently we don't need referral link -->
+        <!-- <div class="right">
+          <a
+            href="#"
+            class="btn whiteBtn iconBtn btnSmall"
+            data-bs-toggle="modal"
+            data-bs-target="#editInfo"
+          >
+            <i class="bx bx-link"></i>
+            Referral link</a
+          >
+        </div> -->
+      </div>
+      <div class="profileWrap">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), remote: true, html: { method: :put }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="row">
+            <div class="col-12 col-md-6 mb-4">
+              <%= f.label :first_name, class: 'form-label' %><br />
+              <%= f.text_field :first_name, class: 'form-control', autofocus: true, autocomplete: "first_name" %>
+            </div>
+
+            <div class="col-12 col-md-6 mb-4">
+              <%= f.label :last_name, class: 'form-label' %><br />
+              <%= f.text_field :last_name, class: 'form-control', autofocus: true, autocomplete: "last_name" %>
+            </div>
+
+            <div class="col-12 col-md-6 mb-4">
+              <%= f.label :phone_number, class: 'form-label' %><br />
+              <%= f.text_field :phone_number, class: 'form-control', autofocus: true, autocomplete: "phone_number" %>
+            </div>
+
+            <div class="col-12 col-md-6 mb-4">
+              <%= f.label :handicap, class: 'form-label' %><br />
+              <%= f.text_field :handicap, class: 'form-control', autofocus: true, autocomplete: "handicap" %>
+            </div>
+
+            <div class="col-12 col-md-6 mb-4">
+              <%= f.label :country, class: 'form-label' %><br />
+              <%#= f.country_select :country, {}, { :class => "form-select" } %>
+              <%= country_select("user", "country", { only: ['GB'], selected: 'GB'}, { class: 'country-select-box form-select' }) %>
+            </div>
+
+            <div class="col-12 col-md-6 mb-4">
+              <%= f.label :postcode, class: 'form-label' %><br />
+              <%= f.text_field :postcode, class: 'form-control', autofocus: true, autocomplete: "postcode" %>
+            </div>
+          </div>
+          <div class="buttonsWrap">
+          <button type="reset" class="btn whiteBtn">Cancel</button>
+          <%= f.submit "Save", :class => 'btn greenBtn' %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

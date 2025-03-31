@@ -1,0 +1,1 @@
+$course_rating = 113

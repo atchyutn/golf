@@ -1,0 +1,32 @@
+<div class="message-group <%= message.user_id == current_user.id ? 'outgoing' : 'incoming' %>">
+  <div class="msg-container">
+    <% unless message.user_id == current_user.id %>
+      <div
+        class="msg-img"
+        style="background-image: url(<%= asset_path 'profile-pic-1.jpeg' %>)"
+      ></div>
+      <div class="msg-bubble">
+        <div class="msg-info">
+          <div class="msg-info-name"><%= message.user.full_name %></div>
+        </div>
+        <div class="msg-text"><%= message.content %></div>
+      </div>
+    <% end %>
+
+    <% if message.user_id == current_user.id %>
+    <div
+        class="msg-img"
+        style="background-image: url(<%= asset_path 'profile-pic-1.jpeg' %>)"
+      ></div>
+      <div class="msg-bubble">
+        <div class="msg-info">
+          <div class="msg-info-name"><%= message.user.full_name %></div>
+        </div>
+        <div class="msg-text"><%= message.content %></div>
+      </div>
+    <% end %>
+  </div>
+  <div class="msg-time <%= message.user_id == current_user.id ? 'outgoing-time' : 'incoming-time' %>">
+    <%= message.created_at.strftime('%I:%M %p') %>
+  </div>
+</div>

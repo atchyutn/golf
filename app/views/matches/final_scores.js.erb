@@ -1,0 +1,37 @@
+console.log('Rendering JS template for match <%= @match.id %>');
+
+// Debug output - check these in console
+console.log('Winner:', '<%= @winner&.name %>');
+console.log('Players:', '<%= @winner&.players&.map(&:full_name)&.join(", ") %>');
+
+// Update modal content
+document.querySelector('#scoreConfirmationModal .modal-title').textContent = "We have a winner!";
+
+// Clear and rebuild avatars
+const avatarContainer = document.getElementById('winner-avatars');
+avatarContainer.innerHTML = '';
+<% @winner.players.each do |player| %>
+  avatarContainer.insertAdjacentHTML('beforeend', `
+    <div class="player-avatars">
+      <% if player.image.attached? %>
+        <%= image_tag player.image, class: "avatar" %>
+      <% else %>
+        <img src="<%= asset_path('profile-pic-1.jpeg') %>" class="avatar" />
+      <% end %>
+    </div>
+  `);
+<% end %>
+
+// Update status and description
+document.getElementById('winner-status').innerHTML = `
+  <%= @match.teams.first.final_standing %>-<%= @match.teams.second.final_standing %> <span>Winner</span>
+`;
+
+document.getElementById('winner-description').innerHTML = `
+  <p><b><%= @winner.players.first.full_name %></b> and <b><%= @winner.players.last.full_name %></b> win the match.</p>
+  <p>Please review your scorecard.</p>
+`;
+
+// Show modal
+const modal = new bootstrap.Modal(document.getElementById('scoreConfirmationModal'));
+modal.show();

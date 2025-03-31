@@ -1,0 +1,10 @@
+<h2>Import Clubs from CSV</h2>
+
+<%= form_with url: @url, multipart: true, method: :post do %>
+  <div class="form-group">
+    <label>Select CSV File</label>
+    <%= file_field_tag :file, class: "form-control" %>
+  </div>
+
+  <%= submit_tag "Import", class: "btn btn-primary" %>
+<% end %>

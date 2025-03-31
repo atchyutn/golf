@@ -1,0 +1,53 @@
+<div class="modal fade" id="editPlayer" tabindex="-1" aria-labelledby="editPlayerLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPlayerLabel">Edit Player</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <%= form_for(current_user.team, url: team_remove_player_path(current_user.team), method: :delete) do |f| %>
+        <!-- modal body -->
+        <div class="modal-body">
+          <!-- Email field (autofilled) -->
+          <div class="mb-4">
+            <label for="email" class="form-label fw-semibold">Email</label>
+            <input type="email" id="player_email_display" class="form-control" readonly>
+          </div>
+        </div>
+        <%= hidden_field_tag :player_email, value: '' %>
+        <div class="modal-footer">
+          <!-- Remove player button -->
+          <%#= f.submit 'Remove Player', class: "btn btn-danger" %>
+          <%= f.button type: 'button', class: 'btn btn-danger', onclick: 'confirmRemovePlayer()' do %>
+            Remove Player
+          <% end %>
+          <button type="button" class="btn greenBtn" data-bs-dismiss="modal">Close</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  function confirmRemovePlayer() {
+    if (confirm("Are you sure you want to remove this player?")) {
+      // If user confirms, submit the form via AJAX
+      var form = jQuery('.edit_team');
+      $.ajax({
+              url: form.attr('action'), // Get the form action URL
+              type: 'DELETE', // Set the HTTP method to DELETE
+              data: form.serialize(), // Serialize the form data
+              success: function(response) {
+                // Handle success response
+                alert("Player removed successfully!");
+                $(".team-page").html(response)
+                window.location.reload();
+              },
+              error: function(xhr, status, error) {
+                // Handle error response
+                console.error("Error removing player:", error);
+              }
+            });
+    }
+  }
+</script>

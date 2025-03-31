@@ -1,0 +1,358 @@
+<section class="banner">
+  <div class="bannerInner">
+    <%= image_tag 'bannerImg.png', alt: '', class: 'bg' %>
+    <div class="inner">
+      <div class="sub">View your matches here</div>
+      <h1 class="title">All matches</h1>
+    </div>
+  </div>
+</section>
+
+<div class="matchesWrap">
+  <div class="container maxWidth888">
+    <%= render partial: 'layouts/tabs', locals: { active_class: '', page: '', match_started: false } %>
+
+    <% if !@cohors_pending %>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h5 class="fw-bold greyText"><%= @winner_brackets ? 'Winner Brackets' : 'Match results for your group will be displayed here when the tournament starts.' %></h5>
+          
+          <div class="pt-4">
+            <div class="d-flex blockBtnWrap pt-2">
+              <% @winner_rounds&.each do |round| %>
+                <button class="blockBtn <%= 'active' if round == 1 %>" data-round="winner-<%= round %>">
+                  <span>Round</span><%= round %>
+                </button>
+              <% end %>
+            </div>
+
+            <% @winner_rounds&.each do |round| %>
+              <% round_matches_result = round_matches(round) %>
+              <% matches_array = round_matches_result.is_a?(Match) ? [round_matches_result] : round_matches_result %>
+              
+              <div class="round-content" id="winner-<%= round %>" style="<%= 'display: none;' unless round == 1 %>">
+                <% matches_array.each_with_index do |match, index| %>
+                  <div class="matchBox pt-4">
+                    <div class="greyText mb-1">Match <%= index + 1 %></div>
+                    <div class="d-flex">
+                      <div class="flex-grow-1">
+                        <% teams = match.teams.order(id: :asc) %>
+                        
+                        <div class="cardStyle p-2 d-flex align-items-center mb-2">
+                          <div class="d-flex userList">
+                            <% unless teams.first.nil? %>
+                              <% teams.first.players.only_players.each do |player| %>
+                                <div class="userItem">
+                                  <img src="/assets/profile-pic-1.jpeg" class="avatar" />
+                                </div>
+                              <% end %>
+                            <% else %>
+                              <div class="userItem"><img src="/assets/userIcon.png" alt="" /></div>
+                              <div class="userItem"><img src="/assets/userIcon.png" alt="" /></div>
+                            <% end %>
+                          </div>
+                          <div class="greyText ps-3">
+                            <% unless teams.first.nil? %>
+                              <% teams.first.players.only_players.each do |player| %>
+                                <div><%= player.full_name %></div>
+                              <% end %>
+                            <% else %>
+                              <div>Team 1</div>
+                            <% end %>
+                          </div>
+                          <% if match.completed? && match.winner_id == teams.first.participant_id %>
+                            <div class="ms-auto winner-badge">
+                              Winner
+                            </div>
+                          <% end %>
+                        </div>
+                        
+                        <div class="cardStyle p-2 d-flex align-items-center">
+                          <div class="d-flex userList">
+                            <% unless teams.second.nil? %>
+                              <% teams.second.players.only_players.each do |player| %>
+                                <div class="userItem">
+                                  <img src="/assets/profile-pic-1.jpeg" class="avatar" />
+                                </div>
+                              <% end %>
+                            <% else %>
+                              <div class="userItem"><img src="/assets/userIcon.png" alt="" /></div>
+                              <div class="userItem"><img src="/assets/userIcon.png" alt="" /></div>
+                            <% end %>
+                          </div>
+                          <div class="greyText ps-3">
+                            <% unless teams.second.nil? %>
+                              <% teams.second.players.only_players.each do |player| %>
+                                <div><%= player.full_name %></div>
+                              <% end %>
+                            <% else %>
+                              <div>Team 2</div>
+                            <% end %>
+                          </div>
+                          <% if match.completed? && match.winner_id == teams.second&.participant_id %>
+                            <div class="ms-auto winner-badge">
+                              Winner
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                      <div class="matchLines">
+                        <div class="d-flex align-items-center h-100">
+                          <div class="box1"></div>
+                          <div class="box2">
+                            <div class="inBox1"></div>
+                            <div class="inBox2"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+
+          <% if @loser_rounds.present? %>
+            <h5 class="fw-bold greyText mt-5">Loser Brackets</h5>
+            
+            <div class="pt-4">
+              <div class="d-flex blockBtnWrap pt-2">
+                <% @loser_rounds&.each do |round| %>
+                  <button class="blockBtn <%= 'active' if round == 1 %>" data-round="loser-<%= round %>">
+                    <span>Round</span><%= round %>
+                  </button>
+                <% end %>
+              </div>
+
+              <% @loser_rounds&.each do |round| %>
+                <% round_matches_result = round_matches(round) %>
+                <% matches_array = round_matches_result.is_a?(Match) ? [round_matches_result] : round_matches_result %>
+                
+                <div class="round-content" id="loser-<%= round %>" style="<%= 'display: none;' unless round == 1 %>">
+                  <% matches_array.each_with_index do |match, index| %>
+                    <div class="matchBox pt-4">
+                      <div class="greyText mb-1">Match <%= index + 1 %></div>
+                      <div class="d-flex">
+                        <div class="flex-grow-1">
+                          <% teams = match.teams.order(id: :asc) %>
+                          
+                          <div class="cardStyle p-2 d-flex align-items-center mb-2">
+                            <div class="d-flex userList">
+                              <% unless teams.first.nil? %>
+                                <% teams.first.players.only_players.each do |player| %>
+                                  <div class="userItem">
+                                    <img src="/assets/profile-pic-1.jpeg" class="avatar" />
+                                  </div>
+                                <% end %>
+                              <% else %>
+                                <div class="userItem"><img src="/assets/userIcon.png" alt="" /></div>
+                                <div class="userItem"><img src="/assets/userIcon.png" alt="" /></div>
+                              <% end %>
+                            </div>
+                            <div class="greyText ps-3">
+                              <% unless teams.first.nil? %>
+                                <% teams.first.players.only_players.each do |player| %>
+                                  <div><%= player.full_name %></div>
+                                <% end %>
+                              <% else %>
+                                <div>Team 1</div>
+                              <% end %>
+                            </div>
+                            <% if match.completed? && match.winner_id == teams.first.participant_id %>
+                              <div class="ms-auto winner-badge">
+                                Winner
+                              </div>
+                            <% end %>
+                          </div>
+                          
+                          <div class="cardStyle p-2 d-flex align-items-center">
+                            <div class="d-flex userList">
+                              <% unless teams.second.nil? %>
+                                <% teams.second.players.only_players.each do |player| %>
+                                  <div class="userItem">
+                                    <img src="/assets/profile-pic-1.jpeg" class="avatar" />
+                                  </div>
+                                <% end %>
+                              <% else %>
+                                <div class="userItem"><img src="/assets/userIcon.png" alt="" /></div>
+                                <div class="userItem"><img src="/assets/userIcon.png" alt="" /></div>
+                              <% end %>
+                            </div>
+                            <div class="greyText ps-3">
+                              <% unless teams.second.nil? %>
+                                <% teams.second.players.only_players.each do |player| %>
+                                  <div><%= player.full_name %></div>
+                                <% end %>
+                              <% else %>
+                                <div>Team 2</div>
+                              <% end %>
+                            </div>
+                            <% if match.completed? && match.winner_id == teams.second&.participant_id %>
+                              <div class="ms-auto winner-badge">
+                                Winner
+                              </div>
+                            <% end %>
+                          </div>
+                        </div>
+                        <div class="matchLines">
+                          <div class="d-flex align-items-center h-100">
+                            <div class="box1"></div>
+                            <div class="box2">
+                              <div class="inBox1"></div>
+                              <div class="inBox2"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="cardStyle">
+            <h5 class="text-center mb-0">Groups are being finalised. Match-ups will appear here when the tournament starts.</h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<style>
+.cardStyle {
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  border-radius: 16px;
+  background: #fff;
+  padding: 24px;
+}
+
+.greyText {
+    color: gray;
+}
+
+.userList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 80px; /* Adjust based on your needs */
+    height: 40px; /* Adjust based on your needs */
+}
+
+.userList .userItem {
+    position: absolute;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+}
+
+.userList .userItem:first-child {
+    left: 0;
+    z-index: 2;
+}
+
+.userList .userItem:nth-child(2) {
+    left: 20px;
+    z-index: 1;
+}
+
+.userList .userItem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.blockBtnWrap {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+}
+
+.blockBtnWrap .blockBtn {
+    border: 1px solid #b4c2c0;
+    background-color: #fff;
+    color: #8f9194;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 15px;
+    margin-right: 5px;
+    padding: 5px 8px;
+    cursor: pointer;
+}
+.blockBtnWrap .blockBtn span {
+    font-size: 10px;
+    display: block;
+    line-height: 12px;
+}
+.blockBtnWrap .blockBtn.active {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+}
+.blockBtnWrap .btnImg {
+    height: 40px;
+    width: 43px;
+}
+
+.round-content {
+    display: none;
+}
+
+.round-content.active {
+    display: block;
+}
+
+.winner-badge {
+    background-color: #4CAF50;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.matchLines {
+    margin-right: -12px;
+}
+
+.matchLines .box1 {
+    border: 1px solid #949f9e;
+    border-left: 0;
+    border-radius: 0 8px 8px 0;
+    width: 30px;
+    height: 65px;
+}
+
+.matchLines .box2 {
+    height: 30px;
+    width: 30px;
+    margin-left: -1px;
+    background-color: #f5f5f5;
+}
+
+.matchLines .box2 .inBox1 {
+    border-left: 1px solid #949f9e;
+    border-bottom: 1px solid #949f9e;
+    width: 100%;
+    height: 15px;
+    border-radius: 0 0 0 8px;
+}
+
+.matchLines .box2 .inBox2 {
+    border-left: 1px solid #949f9e;
+    border-top: 1px solid #949f9e;
+    width: 100%;
+    height: 15px;
+    border-radius: 8px 0 0 0;
+}
+</style>

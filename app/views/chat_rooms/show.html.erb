@@ -1,0 +1,133 @@
+<%= turbo_stream_from "chat_room_#{@chat_room.id}" %>
+
+<div class="chat-container">
+  <!-- Chat Header -->
+  <div class="chat-header">
+    <%= link_to root_path, class: "back-button" do %>
+      <i class="bx bx-chevron-left"></i>
+    <% end %>
+    <h1>Chat Room</h1>
+  </div>
+
+  <!-- Chat Messages -->
+  <div class="chat-messages" id="messages" data-controller="chat" data-chat-target="messages">
+  <div class="date-divider">
+      <span>Today</span>
+    </div>
+    <%= render @chat_room.messages %>
+  </div>
+
+  <!-- Message Input -->
+  <div class="message-input-container">
+    <%= render "messages/form", chat_room: @chat_room, message: @chat_room.messages.new %>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const chatRoom = document.getElementById("chat-room");
+
+    if (chatRoom) {
+      const roomId = chatRoom.dataset.roomId;
+
+      function markMessagesAsRead() {
+        fetch(`/chat_rooms/${roomId}/mark_as_read`, {
+          method: "POST",
+          headers: {
+            "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+            "Accept": "application/json",
+          },
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log("✅ Messages marked as read:", data.unread_count);
+        })
+        .catch(error => {
+          console.error("❌ Failed to mark messages as read:", error);
+        });
+      }
+
+      markMessagesAsRead();
+
+      document.addEventListener('turbo:before-stream-render', (event) => {
+        if (event.target.id === "messages") {
+          markMessagesAsRead();
+        }
+      });
+    }
+  });
+
+  const roomId = document.getElementById("chat-room")?.dataset.roomId;
+
+  function enterChatRoom() {
+    if (roomId) {
+      fetch(`/chat_rooms/${roomId}/enter`, {
+        method: "POST",
+        headers: {
+          "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+          "Accept": "application/json",
+        },
+      }).then(response => {
+        if (response.ok) {
+          console.log("✅ Entered the chat room");
+        } else {
+          console.error("❌ Failed to enter chat room");
+        }
+      });
+    }
+  }
+
+  function leaveChatRoom() {
+    if (roomId) {
+      fetch(`/chat_rooms/${roomId}/leave`, {
+        method: "POST",
+        headers: {
+          "X-CSRF-Token": document.querySelector('[name="csrf-token"]').content,
+          "Accept": "application/json",
+        },
+      }).then(response => {
+        if (response.ok) {
+          console.log("✅ Left the chat room");
+          window.location.href = "/"; 
+        } else {
+          console.error("❌ Failed to leave chat room");
+        }
+      });
+    }
+  }
+
+  // Handle browser back/forward button
+  window.addEventListener("popstate", () => {
+    leaveChatRoom();
+  });
+
+  // Auto-mark messages as read on page load
+  enterChatRoom();
+</script>
+
+<style>
+  .chat-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .chat-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('<%= asset_path('chat-back.jpg') %>');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    z-index: 1;
+  }
+
+  .chat-container > * {
+    position: relative;
+    z-index: 2;
+  }
+</style>

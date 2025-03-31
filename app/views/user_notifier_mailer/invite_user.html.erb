@@ -1,0 +1,15 @@
+<h1>Hi <%= @invitation.invitee_email %></h1>
+<div>
+  <p><%= @invitation.requester.full_name %> invited you to the team as a <%= @invitation.player_type %></p>
+</div>
+
+<% if User.find_by(email: @invitation[:invitee_email]).present? %>
+  <div>
+   <%#= link_to "Accept Invite", new_user_session_url(invitation_id: @invitation.id) %>
+   <%= link_to "Accept Invite", redirect_user_url(invitation_id: @invitation.id) %>
+  </div>
+<%else%>
+  <div>
+   <%= link_to "Accept Invite", new_user_registration_url(invitation_id: @invitation.id) %>
+  </div>
+<%end%>

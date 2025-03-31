@@ -1,0 +1,25 @@
+<% if key == "upcoming" && display_text %>
+   <div class="playBy" style="color: red;">Play by <%= key_match&.match_time&.strftime('%B %d') %></div>
+<% end %>
+<div class="cardHeader timePlace">
+  <div class="row align-items-center">
+    <div class="col-12 col-md-6">
+      <div class="textWithIcon">
+        <div class="iconWrap">
+            <i class="bx bx-calendar"></i>
+        </div>
+        <div class="text match_time">
+          <%= key_match&.match_time.nil? ? "To be confirmed" : key_match&.match_time&.strftime("%B %d - %H:%M") %>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="textWithIcon">
+        <div class="iconWrap">
+            <i class="bx bx-map"></i>
+        </div>
+        <div class="text match_course"><%= key_match&.home_course.nil? ? "To be confirmed" : key_match&.home_course&.name %></div>
+      </div>
+    </div>
+  </div>
+</div>

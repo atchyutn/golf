@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  tournament_type: MyString
+  url: MyString
+  subdomain: MyString
+  description: MyString
+  open_signup: false
+  hold_third_place_match: false
+  pts_for_match_win: 1.5
+  pts_for_match_tie: 1.5
+  pts_for_game_win: 1.5
+  pts_for_game_tie: 1.5
+  pts_for_bye: 1.5
+  swiss_rounds: 1
+  ranked_by: MyString
+  rr_pts_for_match_win: 1.5
+  rr_pts_for_match_tie: 9.99
+  rr_pts_for_game_win: 9.99
+
+two:
+  name: MyString
+  tournament_type: MyString
+  url: MyString
+  subdomain: MyString
+  description: MyString
+  open_signup: false
+  hold_third_place_match: false
+  pts_for_match_win: 1.5
+  pts_for_match_tie: 1.5
+  pts_for_game_win: 1.5
+  pts_for_game_tie: 1.5
+  pts_for_bye: 1.5
+  swiss_rounds: 1
+  ranked_by: MyString
+  rr_pts_for_match_win: 1.5
+  rr_pts_for_match_tie: 9.99
+  rr_pts_for_game_win: 9.99

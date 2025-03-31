@@ -1,0 +1,18 @@
+<% if player.present? %>
+<div class="player">
+  <div class="profilePic">
+    <% if player.image.attached? %>
+      <%= image_tag player.image %>
+    <% else %>
+      <%= image_tag 'profile-pic-1.jpeg', alt: '' %>
+    <% end %>
+  </div>
+  <div class="name"><%= player.full_name %></div>
+</div>
+<% else %>
+  <div class="player">
+    <div class="profilePic">
+    </div>
+    <div class="name"></div>
+  </div>
+<% end %>

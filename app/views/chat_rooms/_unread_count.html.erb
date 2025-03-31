@@ -1,0 +1,7 @@
+<span id="message_unread_count">
+  <% if unread_count.positive? %>
+    <span class="badge"><%= unread_count %></span>
+  <% else %>
+    <span class="badge" style="display: none;"></span>
+  <% end %>
+</span>

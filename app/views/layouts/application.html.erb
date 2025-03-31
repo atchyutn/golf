@@ -1,0 +1,69 @@
+<%= turbo_include_tags %>
+<%= action_cable_meta_tag %>
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sportingly</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+  <body>
+    <%= turbo_stream_from "user_#{current_user&.id}_notifications" %>
+    
+    <% unless controller_path.start_with?('admins') %>
+      <%= render partial: 'layouts/nav_bar' %>
+    <% end %>
+    <div id="notifications" class="notifications"></div>
+    <!-- Flash Messages -->
+    <% if flash.any? %>
+      <div class="container mt-3">
+        <% flash.each do |type, message| %>
+          <div class="alert alert-<%= type == 'alert' ? 'danger' : 'success' %> alert-dismissible fade show" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.js"></script>
+    <%= javascript_importmap_tags %>
+    <script>
+      document.addEventListener("turbo:load", () => {
+        setUserOnline();
+      });
+
+      window.addEventListener("beforeunload", () => {
+        setUserOffline();
+      });
+
+      function setUserOnline() {
+        fetch("/users/set_online", { method: "PATCH", credentials: "same-origin" });
+      }
+
+      function setUserOffline() {
+        fetch("/users/set_offline", { method: "PATCH", credentials: "same-origin" });
+      }
+    </script>
+
+  </body>
+</html>

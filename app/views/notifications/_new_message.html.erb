@@ -1,0 +1,11 @@
+<div class="notification">
+  <% if chat_room.present? && message.present? %>
+    <span class="icon">📩</span>
+    <span class="message">New message in Chat Room from <%= message.user.full_name %></span>
+    <% if unread_count.positive? %>
+      <span class="badge"><%= unread_count %></span>
+    <% end %>
+  <% else %>
+    <span class="message">No new messages</span>
+  <% end %>
+</div>

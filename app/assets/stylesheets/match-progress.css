@@ -1,0 +1,538 @@
+.tableWrap {
+  overflow-x: scroll;
+  width: calc(100% + 48px);
+  padding: 0 24px;
+  margin-left: -24px;
+  /* Apply a border to the right of all but the last column */
+  /* Apply a border to the bottom of all but the last row */
+}
+.tableWrap.noPadding {
+  padding: 0;
+}
+.tableWrap .table.table-striped {
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.tableWrap .table.table-striped th {
+  background: #f9fafb;
+  border-bottom: 1px solid #d0d5dd;
+  white-space: nowrap;
+}
+.tableWrap .table.table-striped th,
+.tableWrap .table.table-striped td {
+  padding: 12px 8px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  padding-right: 24px;
+}
+.tableWrap .table.table-striped td {
+  border-bottom: none;
+  background: #f9fafb;
+  color: #000;
+}
+.tableWrap .table.table-striped tr td:first-child {
+  white-space: nowrap;
+}
+.tableWrap .table-striped > tbody > tr:nth-of-type(odd) {
+  --bs-table-accent-bg: #ffffff;
+  color: #000;
+}
+.tableWrap .table.bordered {
+  border-radius: 8px;
+  overflow: auto;
+  margin-bottom: 40px;
+  table-layout: fixed;
+  white-space: nowrap;
+  width: auto;
+}
+.tableWrap .table.bordered > :not(caption) > * > * {
+  border-bottom: none;
+}
+.tableWrap .table.bordered > :not(caption) > * > td {
+  border-bottom: 1px solid #d0d5dd;
+}
+.tableWrap .table.bordered > :not(caption) > * > th {
+  border-bottom: 1px solid #d0d5dd;
+}
+.tableWrap .table.bordered tr {
+  background: #f9fafb;
+}
+.tableWrap .table.bordered > tbody > tr:nth-of-type(odd) {
+  background: #ffffff;
+  color: #000;
+}
+.tableWrap .table.bordered tr td:first-child,
+.tableWrap .table.bordered tr th:first-child {
+  text-align: left;
+  padding: 12px 8px;
+}
+.tableWrap .table.bordered td,
+.tableWrap .table.bordered th {
+  padding: 12px 5px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  white-space: nowrap;
+  text-align: center;
+  min-width: 46px;
+}
+.tableWrap .table.bordered th {
+  position: sticky;
+  left: 0;
+  top: 0;
+  background: #ffffff;
+  z-index: 2;
+  border-left: 1px solid #d0d5dd;
+}
+.tableWrap .table.bordered {
+  /* Change these properties */
+  --border: 1px solid #d0d5dd;
+  border-radius: 0px;
+  /* Don't change these properties */
+  border-spacing: 0;
+  border-collapse: separate;
+  border: var(--border);
+  border-left: none;
+  border-bottom: none;
+}
+.tableWrap .table.bordered th:not(:last-child),
+.tableWrap .table.bordered td:not(:last-child) {
+  border-right: var(--border);
+}
+.tableWrap .table.bordered > thead > tr:not(:last-child) > th,
+.tableWrap .table.bordered > thead > tr:not(:last-child) > td,
+.tableWrap .table.bordered > tbody > tr:not(:last-child) > th,
+.tableWrap .table.bordered > tbody > tr:not(:last-child) > td,
+.tableWrap .table.bordered > tfoot > tr:not(:last-child) > th,
+.tableWrap .table.bordered > tfoot > tr:not(:last-child) > td,
+.tableWrap .table.bordered > tr:not(:last-child) > td,
+.tableWrap .table.bordered > tr:not(:last-child) > th,
+.tableWrap .table.bordered > thead:not(:last-child),
+.tableWrap .table.bordered > tbody:not(:last-child),
+.tableWrap .table.bordered > tfoot:not(:last-child) {
+  border-bottom: var(--border);
+}
+
+.redText {
+  color: #dd4040;
+}
+
+.blueText {
+  color: #0416b4;
+}
+
+.holeSlider {
+  margin: 0 56px 40px;
+  border: 1px solid #d0d5dd;
+  background: #ffffff;
+  padding: 12px 0;
+  border-radius: 4px;
+}
+.holeSlider .slick-slide {
+  padding: 4px;
+  height: 15% !important;
+}
+.holeSlider .slick-slide .box {
+  border: 1px solid #d0d5dd;
+  min-width: 64px;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fbfffe;
+  flex-direction: column;
+  border-radius: 4px;
+  padding: 8px;
+}
+.holeSlider .slick-slide .box.completed {
+  background: #00f1c8;
+  color: #000;
+  opacity: 0.4;
+  border: transparent;
+}
+.holeSlider .slick-slide .box .title {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16.8px;
+  text-align: center;
+  margin-bottom: 2px;
+}
+.holeSlider .slick-slide .box .numb {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28.8px;
+  text-align: center;
+}
+.holeSlider .slick-slide.slick-current .box {
+  background: #000;
+  color: #fff;
+}
+.holeSlider .slick-arrow {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #d0d5dd;
+  background: #ffffff;
+  font-size: 24px;
+  border-radius: 50%;
+  color: #000;
+}
+.holeSlider .slick-arrow::before {
+  display: none;
+}
+.holeSlider .slick-prev {
+  left: -56px;
+}
+.holeSlider .slick-next {
+  right: -56px;
+}
+
+.teamScoreWrap {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22.4px;
+}
+.teamScoreWrap .teamName {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  margin-bottom: 16px;
+}
+.teamScoreWrap .card .box {
+  background: #fbfffe;
+  border: 1px solid #d0d5dd;
+  padding: 11px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.teamScoreWrap .card .box:last-child {
+  margin-bottom: 0;
+}
+.teamScoreWrap .card .box .left {
+  display: flex;
+  margin-right: auto;
+  align-items: center;
+}
+.teamScoreWrap .card .box .profilePic {
+  height: 48px;
+  width: 48px;
+  overflow: hidden;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+.teamScoreWrap .card .box .profilePic img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+}
+.teamScoreWrap .card .box .hcp {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+}
+.teamScoreWrap .card .box .score {
+  padding: 9px 0;
+  -webkit-appearance: none;
+  height: 48px;
+  width: 48px;
+  text-align: center;
+}
+.teamScoreWrap .card .box input.score::-webkit-outer-spin-button,
+.teamScoreWrap .card .box input.score::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.tournamentsWrap {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+.tournamentsWrap .playOffStage {
+  background: #2bc88e;
+  color: #fff;
+  border-radius: 8px;
+  flex-basis: 0;
+  flex-grow: 1;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29.26px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  min-width: 282px;
+}
+.tournamentsWrap .round {
+  padding-right: 16px;
+  min-width: 282px;
+  flex-basis: 0;
+  flex-grow: 1;
+}
+.tournamentsWrap .round .title {
+  padding: 24px 16px;
+  gap: 10px;
+  border-bottom: 2px solid #000000;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.tournamentsWrap .round .roundWrap {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+.tournamentsWrap .round .roundWrap::-webkit-scrollbar {
+  height: 8px;
+}
+.tournamentsWrap .round .roundWrap::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+.tournamentsWrap .round .roundWrap::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.tournamentsWrap .round .matchesWrap {
+  position: relative;
+  padding: 0;
+  flex-basis: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 384px;
+}
+.tournamentsWrap .round .matchesWrap::before {
+  content: "";
+  width: 1px;
+  background: #000;
+  position: absolute;
+  height: 50%;
+  top: 25%;
+  right: -1px;
+}
+.tournamentsWrap .round .matchesWrap .matchWrap {
+  position: relative;
+  width: calc(100% - 21px);
+}
+.tournamentsWrap .round .matchesWrap .matchWrap::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: #000;
+  position: absolute;
+  top: 50%;
+  right: -22px;
+}
+.tournamentsWrap .round .matchesWrap .matchWrap .team {
+  display: flex;
+  padding: 7px;
+  background: #00f1c8;
+  border-radius: 8px 8px 0 0;
+  border: 1px solid #d0d5dd;
+  justify-content: space-between;
+  align-items: center;
+}
+.tournamentsWrap .round .matchesWrap .matchWrap .team:last-child {
+  background: #ffd4d4;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid #d0d5dd;
+  border-top: none;
+  padding: 8px 7px 7px;
+}
+.tournamentsWrap .round .matchesWrap .matchWrap .team .playerNames .player {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.tournamentsWrap
+  .round
+  .matchesWrap
+  .matchWrap
+  .team
+  .playerNames
+  .player:last-child {
+  margin-bottom: 0;
+}
+.tournamentsWrap
+  .round
+  .matchesWrap
+  .matchWrap
+  .team
+  .playerNames
+  .player
+  .profilePic {
+  height: 24px;
+  width: 24px;
+  margin-right: 8px;
+}
+.tournamentsWrap
+  .round
+  .matchesWrap
+  .matchWrap
+  .team
+  .playerNames
+  .player
+  .profilePic
+  img {
+  height: 24px;
+  width: 24px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.tournamentsWrap
+  .round
+  .matchesWrap
+  .matchWrap
+  .team
+  .playerNames
+  .player
+  .name {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+.tournamentsWrap .round .matchesWrap .matchWrap .team .winner {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16.8px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.tournamentsWrap .round .matchesWrap .matchWrap .team .winner div {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22.4px;
+}
+.tournamentsWrap
+  .slick-slide
+  + .slick-slide
+  .round
+  .matchesWrap
+  .matchWrap::after {
+  content: "";
+  width: 15px;
+  height: 1px;
+  background: #000;
+  position: absolute;
+  top: 50%;
+  left: -15px;
+}
+.tournamentsWrap .slick-slide:nth-last-child(2) .matchesWrap .matchWrap::before,
+.tournamentsWrap .slick-slide:nth-last-child(2) .matchesWrap::before {
+  display: none;
+}
+.tournamentsWrap .slick-track {
+  display: flex;
+  
+  justify-content: center;
+  
+}
+.tournamentsWrap .slick-slide {
+  height: inherit !important;
+}
+.tournamentsWrap .slick-slide > div {
+  display: flex;
+  height: 100%;
+}
+.tournamentsWrap .slick-slide .round,
+.tournamentsWrap .slick-slide .playOffStage {
+  display: flex !important;
+  flex-direction: column;
+}
+.tournamentsWrap .slick-arrow {
+  height: 40px;
+  width: 40px;
+  font-size: 24px;
+  color: #000;
+  top: 40px;
+  z-index: 1000;
+}
+.tournamentsWrap .slick-arrow::before {
+  display: none;
+}
+.tournamentsWrap .slick-arrow.slick-disabled {
+  opacity: 0.3;
+}
+.tournamentsWrap .slick-prev {
+  left: 0;
+}
+.tournamentsWrap .slick-next {
+  right: 0;
+}
+
+@media (min-width: 992px) {
+  .horizontalScroll {
+    width: 100%;
+    overflow-x: scroll;
+  }
+  .tournamentsWrap {
+    min-width: 1416px;
+  }
+}
+@media (max-width: 767px) {
+  .holeSlider {
+    margin: 0 0 96px;
+  }
+  .holeSlider .slick-next,
+  .holeSlider .slick-prev {
+    top: auto;
+    bottom: -56px;
+    transform: translate(0, 0);
+  }
+  .holeSlider .slick-prev {
+    left: 50%;
+    margin-left: -44px;
+  }
+  .holeSlider .slick-next {
+    left: 50%;
+    margin-left: 4px;
+  }
+  .mobilePad0 {
+    padding: 0;
+  }
+  .tournamentsWrap .round {
+    padding-right: 0;
+  }
+  .tournamentsWrap .round .matchesWrap .matchWrap {
+    width: calc(100% - 55px - 16px);
+    margin-left: 16px;
+  }
+  .tournamentsWrap .round .matchesWrap .matchWrap::before {
+    width: 39px;
+    right: -39px;
+  }
+  .tournamentsWrap .round .matchesWrap::before {
+    right: 16px;
+  }
+  .tournamentsWrap
+    .slick-slide
+    + .slick-slide
+    .round
+    .matchesWrap
+    .matchWrap::after {
+    width: 32px;
+    left: -32px;
+  }
+  .tournamentsWrap .round .title {
+    border-bottom: 1px solid #d0d5dd;
+  }
+} /*# sourceMappingURL=match-progress.css.map */

@@ -1,0 +1,100 @@
+<div class="matchesWrap">
+  <div class="container maxWidth888">
+		<%= render partial: 'layouts/tabs', locals: { match_started: true, page: ''} %>
+		<div class="card">
+      <div class="cardHeader profileHeader">
+        <div class="left">
+          <div class="info">
+            <div class="name">Round <%= @match.round %></div>
+            <div class="sub"><%= @match.cohors.name %></div>
+          </div>
+        </div>
+      </div>
+      <%= render partial: 'matches/match_information', locals: { key: @match.status, key_match: @match, display_text: false } %>
+  </div>
+	<div class="card">
+		<div class="cardHeader">
+	    <div class="left">
+	      <h3>Course handicap calculation</h3>
+	    </div>
+	 	</div>
+	<div class="tableWrap">
+		<% content = course_columns(@match) %>
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th></th>
+			    <% content[:full_name].each do |name| %>
+			      <%= name %>
+			    <% end %>
+		    </tr>
+		  </thead>
+			<tbody>
+			  <tr>
+			    <td>Handicap</td>
+			    <% content[:handicape].each do |handicap| %>
+			      <%= handicap %>
+			    <% end %>
+			  </tr>
+			  <tr>
+			    <td>Tee color</td>
+			    <% content[:tee_color].each do |color| %>
+			      <%= color %>
+			    <% end %>
+			  </tr>
+			  <tr>
+			    <td>Course difficulty</td>
+			    <% content[:course_difficulty].each do |dif| %>
+			      <%= dif %>
+			    <% end %>
+			  </tr>
+			  <tr>
+			    <td>Slope rating</td>
+			    <% content[:slope_rating].each do |slope| %>
+			      <%= slope %>
+			    <% end %>
+			  </tr>
+			  <tr>
+			    <td>Course handicap</td>
+			    <% content[:course_handicaps].each do |handicap| %>
+			      <%= handicap %>
+			    <% end %>
+			  </tr>
+			  <tr>
+			    <td>Reduce by 10%</td>
+			    <% content[:reduce_ten].each do |reduction| %>
+			      <%= reduction %>
+			    <% end %>
+			  </tr>
+			  <tr>
+			    <td>Final handicap</td>
+			    <% content[:final_handicap].each do |handicap| %>
+			      <%= handicap %>
+			    <% end %>
+			  </tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="buttonsWrap">
+	<% if @match.teams.count >= 2 %>
+  	<%= link_to 'Start match', match_summary_path(id: @match), class: "btn greenBtn"%>
+  <% end %>
+</div>
+</div>
+</div>
+
+<style>
+.matchesWrap .buttonsWrap .btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 13px;
+  border-radius: 24px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000;
+  margin-bottom: 8px;
+  background: #64bd59;
+}
+</style>

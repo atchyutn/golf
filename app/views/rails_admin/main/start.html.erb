@@ -1,0 +1,12 @@
+<h3>Are you sure you want to start this cohors <%= @object.name %> ?</h3>
+<div style="display: flex;">
+  <%= form_tag start_path(model_name: params[:model_name], id: params[:id]), method: :post do %>
+    <button class="btn btn-success" data-disable-with="Yes, I'm sure" type="submit">
+      <i class="fas fa-check"></i> Yes, I'm sure
+    </button>
+  <% end %>
+
+  <%= link_to index_path(model_name: params[:model_name]), class: "btn btn-default" do %>
+    <i class="fas fa-times"></i> Cancel
+  <% end %>
+</div>

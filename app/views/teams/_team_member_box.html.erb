@@ -1,0 +1,22 @@
+<% if team_member.present? %>
+  <div class="box">
+    <div class="left">
+      <div class="profilePic">
+        <% if team_member.image.attached? %>
+          <%= image_tag team_member.image %>
+        <% else %>
+          <%= image_tag 'profile-pic-1.jpeg', alt: '' %>
+        <% end %>
+      </div>
+      <div class="info me-auto">
+        <div class="name"><%= team_member.full_name %></div>
+        <div class="hcp">Hcp: <%= team_member.handicap %></div>
+      </div>
+    </div>
+    <% if team_member.present? && team_member.captain? %>
+      <div class="tag captain">Captain</div>
+    <% end %>
+  </div>
+<% else %>
+  <%= render 'teams/invite_button', player_type: player_type %>
+<% end %>

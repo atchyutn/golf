@@ -1,0 +1,60 @@
+tee_id,course_id,facility_id,course_name,tee_name,tee_color,course_par_for_tee,rating,slope,gender,hole1_par,hole2_par,hole3_par,hole4_par,hole5_par,hole6_par,hole7_par,hole8_par,hole9_par,hole10_par,hole11_par,hole12_par,hole13_par,hole14_par,hole15_par,hole16_par,hole17_par,hole18_par,hole1_handicap,hole2_handicap,hole3_handicap,hole4_handicap,hole5_handicap,hole6_handicap,hole7_handicap,hole8_handicap,hole9_handicap,hole10_handicap,hole11_handicap,hole12_handicap,hole13_handicap,hole14_handicap,hole15_handicap,hole16_handicap,hole17_handicap,hole18_handicap,
+GBR-ESS-0067-01-01,GBR-WAR-0001-01,Langdon Hills Golf Club,Langdon,Blue,Blue,35,N/D,N/D,man,4,4,4,4,3,5,4,3,4,~,~,~,~,~,~,~,~,~,16,4,14,8,18,12,2,10,6,~,~,~,~,~,~,~,~,~,
+GBR-ESS-0067-01-02,GBR-ESS-0067-01,Langdon Hills Golf Club,Langdon,White,White,35,34.9,122,woman,4,4,4,4,3,5,4,3,4,~,~,~,~,~,~,~,~,~,16,4,14,8,18,12,2,10,6,~,~,~,~,~,~,~,~,~,
+GBR-ESS-0067-01-03,GBR-ESS-0067-01,Langdon Hills Golf Club,Langdon,Yellow,Yellow,35,34.2,119,man,4,4,4,4,3,5,4,3,4,~,~,~,~,~,~,~,~,~,16,4,14,8,18,12,2,10,6,~,~,~,~,~,~,~,~,~,
+GBR-ESS-0067-01-04,GBR-ESS-0067-01,Langdon Hills Golf Club,Langdon,Red (L),Red,36,35.2,111,woman,4,5,4,4,3,5,4,3,4,~,~,~,~,~,~,~,~,~,10,16,8,4,18,6,2,14,12,~,~,~,~,~,~,~,~,~,
+GBR-ESS-0067-02-01,GBR-ESS-0067-02,Langdon Hills Golf Club,Horndon,Blue,Blue,36,N/D,N/D,woman,4,4,3,5,4,4,5,3,4,~,~,~,~,~,~,~,~,~,9,17,15,7,3,13,1,5,11,~,~,~,~,~,~,~,~,~,
+GBR-ESS-0067-02-02,GBR-ESS-0067-02,Langdon Hills Golf Club,Horndon,White,White,36,N/D,N/D,man,4,4,3,5,4,4,5,3,4,~,~,~,~,~,~,~,~,~,9,17,15,7,3,13,1,5,11,~,~,~,~,~,~,~,~,~,
+GBR-ESS-0067-02-03,GBR-ESS-0067-02,Langdon Hills Golf Club,Horndon,Yellow,Yellow,36,N/D,N/D,man,4,,4,3,5,4,4,5,3,4,~,~,~,~,~,~,~,~,~,9,17,15,7,3,13,1,5,11,~,~,~,~,~,~,~,~,~
+GBR-ESS-0067-02-04,GBR-ESS-0067-02,Langdon Hills Golf Club,Horndon,Red (L),Red,36,34.5,113,man,4,,4,3,5,4,4,5,3,4,~,~,~,~,~,~,~,~,~,7,17,11,9,1,15,3,13,5,~,~,~,~,~,~,~,~,~
+GBR-ESS-0067-03-01,GBR-ESS-0067-03,Langdon Hills Golf Club,Bulphan,Blue,Blue,37,N/D,N/D,man,5,,4,5,4,3,4,5,3,4,~,~,~,~,~,~,~,~,~,17,1,9,13,3,7,11,15,5,~,~,~,~,~,~,~,~,~
+GBR-ESS-0067-03-02,GBR-ESS-0067-03,Langdon Hills Golf Club,Bulphan,White,White,37,36.8,133,man,5,,4,5,4,3,4,5,3,4,~,~,~,~,~,~,~,~,~,17,1,9,13,3,7,11,15,5,~,~,~,~,~,~,~,~,~
+GBR-ESS-0067-03-03,GBR-ESS-0067-03,Langdon Hills Golf Club,Bulphan,Yellow,Yellow,37,35.9,127,man,5,,4,5,4,3,4,5,3,4,~,~,~,~,~,~,~,~,~,17,1,9,13,3,7,11,15,5,~,~,~,~,~,~,~,~,~
+GBR-ESS-0067-03-04,GBR-ESS-0067-03,Langdon Hills Golf Club,Bulphan,Red (L),Red,38,37.2,137,man,5,,4,5,4,3,4,5,3,5,~,~,~,~,~,~,~,~,~,17,1,9,7,11,3,5,13,15,~,~,~,~,~,~,~,~,~
+GBR-ESS-0067-04-01,GBR-ESS-0067-04,Langdon Hills Golf Club,Bulphan/Horndon,Blue,Blue,73,N/D,N/D,man,5,,4,5,4,3,4,5,3,4,4,4,3,5,4,4,5,3,4,18,2,10,14,4,8,12,16,6,9,17,15,7,3,13,1,5,11
+GBR-ESS-0067-04-02,GBR-ESS-0067-04,Langdon Hills Golf Club,Bulphan/Horndon,White,White,73,71.7,123,man,5,,4,5,4,3,4,5,3,4,4,4,3,5,4,4,5,3,4,18,2,10,14,4,8,12,16,6,9,17,15,7,3,13,1,5,11
+GBR-ESS-0067-04-03,GBR-ESS-0067-04,Langdon Hills Golf Club,Bulphan/Horndon,Yellow,Yellow,73,70.9,120,man,5,,4,5,4,3,4,5,3,4,4,4,3,5,4,4,5,3,4,18,2,10,14,4,8,12,16,6,9,17,15,7,3,13,1,5,11
+GBR-ESS-0067-04-04,GBR-ESS-0067-04,Langdon Hills Golf Club,Bulphan/Horndon,Red (L),Red,74,71.7,119,man,5,,4,5,4,3,4,5,3,5,4,4,3,5,4,4,5,3,4,18,2,10,8,12,4,6,14,16,7,17,11,9,1,15,3,13,5
+GBR-ESS-0067-05-01,GBR-ESS-0067-05,Langdon Hills Golf Club,Horndon/Langdon,Blue,Blue,71,N/D,N/D,man,4,,4,3,5,4,4,5,3,4,4,4,4,4,3,5,4,3,4,9,17,15,7,3,13,1,5,11,16,4,14,8,18,12,2,10,6
+GBR-ESS-0067-05-02,GBR-ESS-0067-05,Langdon Hills Golf Club,Horndon/Langdon,White,White,71,69,117,man,4,,4,3,5,4,4,5,3,4,4,4,4,4,3,5,4,3,4,9,17,15,7,3,13,1,5,11,16,4,14,8,18,12,2,10,6
+GBR-ESS-0067-05-03,GBR-ESS-0067-05,Langdon Hills Golf Club,Horndon/Langdon,Yellow,Yellow,71,68.2,115,man,4,,4,3,5,4,4,5,3,4,4,4,4,4,3,5,4,3,4,9,17,15,7,3,13,1,5,11,16,4,14,8,18,12,2,10,6
+GBR-ESS-0067-05-04,GBR-ESS-0067-05,Langdon Hills Golf Club,Horndon/Langdon,Red (L),Red,72,69.7,112,man,4,,4,3,5,4,4,5,3,4,4,5,4,4,3,5,4,3,4,7,17,11,9,1,15,3,13,5,10,16,8,4,18,6,2,14,12
+GBR-ESS-0067-06-01,GBR-ESS-0067-06,Langdon Hills Golf Club,Langdon/Bulphan,Blue,Blue,72,N/D,N/D,man,4,,4,4,4,3,5,4,3,4,5,4,5,4,3,4,5,3,4,16,4,14,8,18,12,2,10,6,17,1,9,13,3,7,11,15,5
+GBR-ESS-0067-06-02,GBR-ESS-0067-06,Langdon Hills Golf Club,Langdon/Bulphan,White,White,72,71.7,128,man,4,,4,4,4,3,5,4,3,4,5,4,5,4,3,4,5,3,4,16,4,14,8,18,12,2,10,6,17,1,9,13,3,7,11,15,5
+GBR-ESS-0067-06-03,GBR-ESS-0067-06,Langdon Hills Golf Club,Langdon/Bulphan,Yellow,Yellow,72,70.1,123,woman,4,,4,4,4,3,5,4,3,4,5,4,5,4,3,4,5,3,4,16,4,14,8,18,12,2,10,6,17,1,9,13,3,7,11,15,5
+GBR-ESS-0067-06-04,GBR-ESS-0067-06,Langdon Hills Golf Club,Langdon/Bulphan,Red (L),Red,74,74,128,woman,4,,5,4,4,3,5,4,3,4,5,4,5,4,3,4,5,3,5,10,16,8,4,18,6,2,14,12,17,1,9,7,11,3,5,13,15
+GBR-CMA-0034-01-01,GBR-CMA-0034-01,Windermere Golf Club,Windermere,White,White,67,66.1,118,woman,4,,3,4,4,4,4,4,3,4,3,4,4,4,3,3,5,4,3,12,4,17,1,14,9,3,8,18,7,16,5,15,13,6,11,2,10
+GBR-CMA-0034-01-02,GBR-CMA-0034-01,Windermere Golf Club,Windermere,Yellow,Yellow,67,65,115,woman,4,,3,4,4,4,4,4,3,4,3,4,4,4,3,3,5,4,3,12,4,17,1,14,9,3,8,18,7,16,5,15,13,6,11,2,10
+GBR-CMA-0034-01-03,GBR-CMA-0034-01,Windermere Golf Club,Windermere,Red (L),Red,70,67.6,121,woman,4,,4,4,5,4,4,5,3,4,3,4,4,4,3,3,5,4,3,5,17,15,9,3,1,7,13,11,4,14,8,10,18,16,6,2,12
+GBR-BDF-0027-01-01,GBR-BDF-0027-01,The Millbrook Golf Club,The Millbrook,Blue,Blue,72,74.3,133,woman,5,,5,4,3,4,4,3,5,4,3,4,4,4,4,5,3,4,4,17,11,5,1,7,3,15,9,13,10,8,2,4,16,14,18,12,6
+GBR-BDF-0027-01-02,GBR-BDF-0027-01,The Millbrook Golf Club,The Millbrook,White,White,74,73.3,135,woman,5,,5,4,4,4,4,3,5,4,3,4,5,4,4,5,3,4,4,9,7,1,17,13,3,15,5,11,12,4,16,2,8,14,18,6,10
+GBR-BDF-0027-01-03,GBR-BDF-0027-01,The Millbrook Golf Club,The Millbrook,Yellow,Yellow,74,71,132,woman,5,,5,4,4,4,4,3,5,4,3,4,5,4,4,5,3,4,4,9,7,1,17,13,3,15,5,11,12,4,16,2,8,14,18,6,10
+GBR-BDF-0027-01-04,GBR-BDF-0027-01,The Millbrook Golf Club,The Millbrook,Red (L),Red,74,74.1,131,woman,5,,5,5,4,4,4,3,5,4,3,3,4,4,4,5,3,4,5,10,4,16,8,14,2,12,6,18,17,11,5,1,13,7,15,3,9
+GBR-BDF-0017-01-01,GBR-BDF-0017-01,John O'Gaunt Golf Club,John O'Gaunt,White,White,71,72.1,130,man,4,,4,4,3,4,4,4,4,5,3,4,4,4,4,4,3,5,4,17,5,9,15,3,1,7,13,11,8,12,16,2,10,4,18,14,6
+GBR-BDF-0017-01-02,GBR-BDF-0017-01,John O'Gaunt Golf Club,John O'Gaunt,White (L),White,77,78.1,144,man,4,,5,4,3,5,5,4,4,5,3,4,4,5,4,5,3,5,5,17,5,9,15,3,1,7,13,11,8,12,16,2,10,4,18,14,6
+GBR-BDF-0017-01-03,GBR-BDF-0017-01,John O'Gaunt Golf Club,John O'Gaunt,Yellow,Yellow,71,70.9,127,man,4,,4,4,3,4,4,4,4,5,3,4,4,4,4,4,3,5,4,17,5,9,15,3,1,7,13,11,8,12,16,2,10,4,18,14,6
+GBR-BDF-0017-01-04,GBR-BDF-0017-01,John O'Gaunt Golf Club,John O'Gaunt,Yellow (L),Yellow,75,77.1,139,man,4,,4,4,3,5,5,4,4,5,3,4,4,5,4,5,3,5,4,17,5,9,15,3,1,7,13,11,8,12,16,2,10,4,18,14,6
+GBR-BDF-0017-01-05,GBR-BDF-0017-01,John O'Gaunt Golf Club,John O'Gaunt,Red,Red,71,68.4,123,man,4,,4,4,3,4,4,4,4,5,3,4,4,4,4,4,3,5,4,16,4,18,14,10,8,2,12,6,7,15,13,5,9,1,17,11,3
+GBR-BDF-0017-01-06,GBR-BDF-0017-01,John O'Gaunt Golf Club,John O'Gaunt,Red (L),Red,74,74,129,man,4,,4,4,3,5,5,4,4,5,3,4,4,5,4,4,3,5,4,16,4,18,14,10,8,2,12,6,7,15,13,5,9,1,17,11,3
+GBR-BDF-0017-02-01,GBR-BDF-0017-02,John O'Gaunt Golf Club,Carthagena,White,White,69,68.8,125,man,4,,3,4,4,4,3,4,3,4,5,3,4,3,4,4,4,4,5,5,10,16,13,3,17,1,18,7,15,6,12,4,14,8,2,9,11
+GBR-BDF-0017-02-02,GBR-BDF-0017-02,John O'Gaunt Golf Club,Carthagena,Yellow,Yellow,69,67.9,122,man,4,,3,4,4,4,3,4,3,4,5,3,4,3,4,4,4,4,5,5,10,16,13,3,17,1,18,7,15,6,12,4,14,8,2,9,11
+GBR-BDF-0017-02-03,GBR-BDF-0017-02,John O'Gaunt Golf Club,Carthagena,Red (L),Red,70,71.1,128,man,4,,3,4,4,4,3,5,3,4,5,3,4,3,4,4,4,4,5,4,16,12,10,2,18,8,14,6,3,9,15,11,17,7,1,13,5
+GBR-SYK-0001-01-01,GBR-SYK-0001-01,Bawtry Golf Club,Bawtry,White,White,73,74,121,man,4,,4,4,4,4,4,5,3,4,5,3,5,5,4,3,4,4,4,5,18,3,9,1,11,7,17,13,10,16,4,14,2,8,12,15,6
+GBR-SYK-0001-01-02,GBR-SYK-0001-01,Bawtry Golf Club,Bawtry,Yellow,Yellow,72,72.1,119,man,4,,4,4,4,4,4,5,3,4,4,3,5,5,4,3,4,4,4,5,18,3,9,1,11,7,17,13,10,16,4,14,2,8,12,15,6
+GBR-SYK-0001-01-03,GBR-SYK-0001-01,Bawtry Golf Club,Bawtry,Red (L),Red,73,72.5,126,woman,4,,4,4,4,4,4,5,3,4,5,3,5,5,4,3,4,4,4,5,18,3,9,1,11,7,17,13,10,16,4,14,2,8,12,15,6
+GBR-TOF-0001-01-01,GBR-TOF-0001-01,Greenmeadow Golf and Country Club,Green Meadows,White,White,70,70.1,129,woman,3,,5,4,4,3,5,3,4,4,4,3,5,3,4,4,4,4,4,18,8,2,15,10,4,17,13,6,5,14,3,9,16,1,11,12,7
+GBR-TOF-0001-01-02,GBR-TOF-0001-01,Greenmeadow Golf and Country Club,Green Meadows,Yellow,Yellow,69,67.5,119,woman,3,,5,4,4,3,4,3,4,4,4,3,5,3,4,4,4,4,4,18,8,2,15,10,4,17,13,6,5,14,3,9,16,1,11,12,7
+GBR-TOF-0001-01-03,GBR-TOF-0001-01,Greenmeadow Golf and Country Club,Green Meadows,Yellow (L),Yellow,71,71.6,133,woman,3,,5,4,4,3,5,3,4,4,4,3,5,3,4,4,4,4,5,18,8,2,16,12,6,14,10,4,3,17,1,9,11,5,7,15,13
+GBR-TOF-0001-01-04,GBR-TOF-0001-01,Greenmeadow Golf and Country Club,Green Meadows,Red,Red,71,65.8,114,woman,3,,5,4,4,3,5,3,4,4,4,3,5,3,4,4,4,4,5,18,8,2,16,12,6,14,10,4,3,17,1,9,11,5,7,15,13
+GBR-TOF-0001-01-05,GBR-TOF-0001-01,Greenmeadow Golf and Country Club,Green Meadows,Red (L),Red,71,69.9,128,woman,3,,5,4,4,3,5,3,4,4,4,3,5,3,4,4,4,4,5,18,8,2,16,12,6,14,10,4,3,17,1,9,11,5,7,15,13
+GBR-TWR-0001-01-01,GBR-TWR-0001-01,Heworth Golf Club,Heworth,White,White,71,69.6,121,woman,4,,4,3,4,4,3,4,4,5,4,5,4,5,4,3,4,4,3,10,8,18,6,2,14,4,12,16,5,7,1,13,17,11,15,3,9
+GBR-TWR-0001-01-02,GBR-TWR-0001-01,Heworth Golf Club,Heworth,Yellow,Yellow,71,68.4,123,woman,4,,4,3,4,4,3,4,4,5,4,5,4,5,4,3,4,4,3,10,8,18,6,2,14,4,12,16,5,7,1,13,17,11,15,3,9
+GBR-TWR-0001-01-03,GBR-TWR-0001-01,Heworth Golf Club,Heworth,Red (L),Red,73,72,130,woman,4,,4,3,4,4,3,4,4,5,4,5,5,5,4,3,4,4,4,6,12,18,10,2,16,4,9,8,3,1,14,5,11,13,15,7,17
+GBR-TYR-0009-01-01,GBR-TYR-0009-01,Clogher Valley Golf Club,Clogher Valley,White - Front,White,34,31.2,101,woman,4,,4,3,4,4,3,4,3,5,~,~,~,~,~,~,~,~,~,2,9,18,6,16,10,3,13,8,~,~,~,~,~,~,~,~,~
+GBR-TYR-0009-01-02,GBR-TYR-0009-01,Clogher Valley Golf Club,Clogher Valley,White - Back,White,33,31,101,woman,4,,4,3,4,4,3,4,3,4,~,~,~,~,~,~,~,~,~,7,5,17,12,14,11,4,15,1,~,~,~,~,~,~,~,~,~
+GBR-VGL-0001-01-01,GBR-VGL-0001-01,Brynhill Golf Club,Brynhill,White,White,72,71.4,122,man,4,,4,3,5,4,4,4,4,3,4,5,3,4,4,5,3,4,5,5,15,11,7,1,13,3,17,9,12,16,8,2,4,18,14,6,10
+GBR-VGL-0001-01-02,GBR-VGL-0001-01,Brynhill Golf Club,Brynhill,Yellow,Yellow,72,70,121,man,4,,4,3,5,4,4,4,4,3,4,5,3,4,4,5,3,4,5,5,15,11,7,1,13,3,17,9,12,16,8,2,4,18,14,6,10
+GBR-VGL-0001-01-03,GBR-VGL-0001-01,Brynhill Golf Club,Brynhill,Red (L),Red,74,72.1,127,man,5,,4,3,5,5,4,4,4,3,4,5,3,4,4,5,3,4,5,5,11,13,1,9,3,7,15,17,10,8,12,2,4,16,14,6,18
+GBR-WAR-0001-01-02,GBR-WAR-0001-01,Forest of Arden-Aylesford Golf Club,Forest of Arden-Aylesford,White,White,69,68.9,129,man,4,,4,5,3,4,3,4,4,4,3,4,3,4,4,4,3,4,5,8,2,12,10,18,16,6,14,4,13,3,11,1,7,5,17,15,9
+GBR-WAR-0001-01-03,GBR-WAR-0001-01,Forest of Arden-Aylesford Golf Club,Forest of Arden-Aylesford,Yellow,Yellow,69,67.8,125,man,4,,4,5,3,4,3,4,4,4,3,4,3,4,4,4,3,4,5,8,2,12,10,18,16,6,14,4,13,3,11,1,7,5,17,15,9
+GBR-WAR-0001-01-01,GBR-WAR-0001-01,Forest of Arden-Aylesford Golf Club,Forest of Arden-Aylesford,Red (L),Red,69,70.3,127,man,4,,5,4,3,4,3,4,4,4,3,4,3,4,4,4,3,4,5,6,8,2,14,18,16,12,10,4,9,7,15,1,5,3,17,13,11

@@ -1,0 +1,50 @@
+<div class="signUpWrap signUpBg">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-4 col-lg-6 col-md-8 signMaxWidth">
+        <div class="error-message">
+        </div>
+        <div class="text-center signInTitle">
+          <h2>Sign in to Global <br />Pairs Challenge</h2>
+          <p>Welcome back! Please sign in to continue</p>
+        </div>
+        <div class="card borderCard">
+          <div class="card-body">
+              <%= form_for(resource, as: resource_name, url: magic_links_path, method:
+              :post) do |f| %> <%= render "devise/shared/error_messages", resource:
+              resource %>
+              <!-- First name input -->
+              <div class="mb-4">
+                <%= f.label :Email, class: 'form-label fw-semibold' %> <%=
+                f.email_field :email, autofocus: true, class: 'form-control
+                emailInput', placeholder: "Type your Email here!", autocomplete:
+                "email" %>
+              </div>
+              <% if params[:invitation_id] %>
+                <%= f.hidden_field :invite_id, value: params[:invitation_id] %>
+              <% end %>
+              <!-- Sign up button -->
+              <div class="d-grid">
+                <%= f.submit :value => "Get magic link", :class => 'btn
+                btn-primary btn-lg rounded-pill bg-teal' %>
+              </div>
+            <% end %>
+            <div class="signUpLink mt-4 pt-4">
+              Don’t have an account? <%= link_to "Sign up",
+              new_registration_path(resource_name) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .error-message {
+      text-align: center;
+      color: #e13838;
+  }
+  .signInTitle{
+    color: #ffffff;
+  }
+</style>

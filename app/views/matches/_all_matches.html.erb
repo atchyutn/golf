@@ -1,0 +1,78 @@
+<% if current_user.team.matches.present? && !only_started_matches? %>
+  <% Match.statuses.each do |key,v| %>
+    <% matches = case key 
+        when 'upcoming' 
+          @upcoming_matches 
+        when 'completed' 
+          @completed_matches 
+        when 'started'  
+          @match_started_matches 
+        else 
+          [] 
+        end %>
+
+    <% if matches.present? %>
+      <h2 class="sectionTitle"><%= key.capitalize %> Match</h2>
+      <% matches.each do |key_match| %>
+        <div class="card">
+          <%= render partial: 'matches/match_information', locals: { key: key, key_match: key_match, display_text: true } %>
+          <% const = 1 %>
+          <% if key == "upcoming" %>
+            <%= render partial: 'matches/upcoming_teams', locals: { const: const, key_match: key_match, match_info: false } %>
+          <% end %>
+          <% if key == "completed" %>
+            <div class="teamWrap completed">
+              <div class="row teamRow">
+                <% key_match.teams.each do |team| %>
+                  <div class="team col-12 col-md-6">
+                    <div class="teamName">Team <%= const %><% if current_user.team == team %><span class="tag home">Home</span><% end %></div>
+                    <% const += 1 %>
+                    <div class="box">
+                      <div class="left">
+                        <% captains = team.players.select { |player| player.captain? } %>
+                        <% regular_players = team.players.select { |player| player.player? } %>
+                        <% reserved_players = team.players.select { |player| player.reserved_player? } %>
+                        <% (captains + regular_players + reserved_players).each do |player| %>
+                          <% unless player.reserved_player? %>
+                            <div class="profilePic">
+                              <% if player.image.attached? %>
+                                <%= image_tag player.image %>
+                              <% else %>
+                                <%= image_tag 'profile-pic-1.jpeg', alt: '' %>
+                              <% end %>
+                            </div>
+                          <% end %>
+                        <% end %>
+                        <div class="info me-auto">
+                          <% (captains + regular_players + reserved_players).each do |player| %>
+                            <% unless player.reserved_player? %>
+                              <div class="name"><%= player.full_name %></div>
+                            <% end %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <% max_val = key_match.scores_csv.first.split('-').map(&:to_i).max if key_match.scores_csv.present? %>
+                      <%= render partial: 'teams/current_standing', locals: { max_val: max_val, team: team, match: key_match } %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% else %>
+  <div class="row justify-content-center">
+    <div class="col-12 maxWidth444">
+      <div class="card soonCard">
+        <div class="iconBox">
+          <%= image_tag "tournament-soon.svg", class: "icon", alt: "" %>
+        </div>
+        <h2>The tournament is started</h2>
+        <p>You can invite teammate or learn more about the tournament</p>
+      </div>
+    </div>
+  </div>
+<% end %>

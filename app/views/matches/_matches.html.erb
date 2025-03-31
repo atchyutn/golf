@@ -1,0 +1,5 @@
+<% if current_user.team.cohors.nil? || current_user.team.cohors&.pending? %>
+  <%= render partial: 'matches/starting_soon' %>
+<% else %>
+  <%= render partial: 'matches/all_matches' %>
+<% end %>

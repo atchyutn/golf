@@ -1,0 +1,65 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+
+# en:
+#   hello: "Hello world"
+
+en:
+  admin:
+    actions:
+      import_clubs:
+        title: "Import Clubs"
+        menu: "Import Clubs"
+        breadcrumb: "Import Clubs"
+
+      import_home_courses:
+        title: "Import Home Courses"
+        menu: "Import Home Courses"
+        breadcrumb: "Import Home Courses"
+
+      import_tees:
+        title: "Import Tees"
+        menu: "Import Tees"
+        breadcrumb: "Import Tees"
+
+      sample_csv_for_home_courses:
+        title: "Download Sample CSV for Home Courses"
+        menu: "Sample CSV for Home Courses"
+        breadcrumb: "Sample CSV"
+
+      sample_csv_for_clubs:
+        title: "Download Sample CSV for Clubs"
+        menu: "Sample CSV for Clubs"
+        breadcrumb: "Sample CSV"
+
+      sample_csv_for_tees:
+        title: "Download Sample CSV for Tees"
+        menu: "Sample CSV for Tees"
+        breadcrumb: "Sample CSV"
+

@@ -1,0 +1,28 @@
+<%= form_with url: match_chat_room_messages_path(@chat_room.match, @chat_room), 
+              method: :post, 
+              local: false, 
+              data: { turbo_frame: "messages" }, 
+              id: "message_form" do |form| %>
+
+  <div class="message-input-container">
+    <div class="input-wrapper">
+      <%= form.text_field :content, 
+                          placeholder: "Type your message...", 
+                          class: "message-input", 
+                          name: "message[content]", 
+                          autocomplete: "off" %>              
+      <%= form.submit "Send", class: "send-button", data: { disable_with: "Sending..." } %>
+    </div>
+  </div>
+
+  <% if @message && @message.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @message.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% end %>

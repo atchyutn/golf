@@ -1,0 +1,146 @@
+<% if current_user.team.payment_status != 'Completed' %>
+  <div class="row justify-content-center">
+    <div class="col-12 maxWidth444">
+      <div class="card soonCard">
+        <div class="iconBox">
+          <img src="/assets/tournament-soon.svg" class="icon" alt="Tournament Soon Icon" />
+        </div>
+        <h2>Tournament Not Started</h2>
+        <p>Please ensure your team profiles are completed and up to date. You can invite teammates or learn more about the tournament.</p>
+        <a href="/teams" class="btn whiteBtn">Setup your team</a>
+        <%= form_with url: create_checkout_session_path, method: :post, class: "pay-now-form", data: { turbo: false } do |form| %>
+          <%= form.submit "Finish payment", class: "btn greenBtn" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <section class="banner">
+    <%= image_tag 'bannerImg.png', alt: '', class: 'bg' %>
+    <div class="inner">
+      <div class="sub">View your matches here</div>
+      <h1 class="title">All Matches</h1>
+    </div>
+  </section>
+  
+  <div class="matchesWrap">
+    <div class="container maxWidth888">
+      <%= render partial: 'layouts/tabs', locals: { active_class: '', page: '', match_started: false } %>
+    </div>
+    
+    <div class="container-fluid mobilePad0">
+      <% if !@cohors.pending? %>
+        <div class="winner-title">W Brackets</div>
+        <div class="horizontalScroll">
+          <div class="tournamentsWrap winner_matches">
+            <% @winner_rounds.each do |round| %>
+              <div class="round">
+                <div class="title">Round <%= round %></div>
+                <div class="roundWrap">
+                  <% round_matches_result = round_matches(round) %>
+                  <% matches_array = round_matches_result.is_a?(Match) ? [round_matches_result] : round_matches_result %>
+                  <div class="matchesWrap totalTeams<%= matches_array.length %>">
+                    <% matches_array.each do |match| %>
+                      <div class="matchWrap">
+                        <div class="team">
+                          <div class="playerNames">
+                            <% teams = match.teams.order(id: :asc) %>
+                            <% unless teams.first.nil? %>
+                              <% teams.first.players.only_players.each do |player| %>
+                                <%= render partial: "matches/teams_data", locals: { player: player } %>
+                              <% end %>
+                            <% else %>
+                              <%= render partial: "matches/teams_data", locals: { player: nil } %>
+                            <% end %>
+                          </div>
+                          <% if match.completed? && match.winner_id == teams.first.participant_id %>
+                            <div class="winner">
+                              <div>Winner</div>
+                              <%= winner_standing(match, teams.first) %>
+                            </div>
+                          <% end %>
+                        </div>
+                        <div class="team">
+                          <div class="playerNames">
+                            <% unless teams.second.nil? %>
+                              <% teams.second.players.only_players.each do |player| %>
+                                <%= render partial: "matches/teams_data", locals: { player: player } %>
+                              <% end %>
+                            <% else %>
+                              <%= render partial: "matches/teams_data", locals: { player: nil } %>
+                            <% end %>
+                          </div>
+                          <% if match.completed? && match.winner_id == teams.second.participant_id %>
+                            <div class="winner">
+                              <div>Winner</div>
+                              <%= winner_standing(match, teams.second) %>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="loser-title"><%= 'L Brackets' if @loser_rounds.present? %></div>
+          <div class="tournamentsWrap loser_matches">
+            <% @loser_rounds&.each do |round| %>
+              <div class="round">
+                <div class="title">Round <%= round %></div>
+                <div class="roundWrap">
+                  <% round_matches_result = round_matches(round) %>
+                  <% matches_array = round_matches_result.is_a?(Match) ? [round_matches_result] : round_matches_result %>
+                  <div class="matchesWrap totalTeams<%= matches_array.length %>">
+                    <% matches_array.each do |match| %>
+                      <div class="matchWrap">
+                        <div class="team">
+                          <div class="playerNames">
+                            <% teams = match.teams.order(id: :asc) %>
+                            <% unless teams.first.nil? %>
+                              <% teams.first.players.only_players.each do |player| %>
+                                <%= render partial: "matches/teams_data", locals: { player: player } %>
+                              <% end %>
+                            <% else %>
+                              <%= render partial: "matches/teams_data", locals: { player: nil } %>
+                            <% end %>
+                          </div>
+                          <% if match.completed? && match.winner_id == teams.first.participant_id %>
+                            <div class="winner">
+                              <div>Winner</div>
+                              <%= winner_standing(match, teams.first) %>
+                            </div>
+                          <% end %>
+                        </div>
+                        <div class="team">
+                          <div class="playerNames">
+                            <% unless teams.second.nil? %>
+                              <% teams.second.players.only_players.each do |player| %>
+                                <%= render partial: "matches/teams_data", locals: { player: player } %>
+                              <% end %>
+                            <% else %>
+                              <%= render partial: "matches/teams_data", locals: { player: nil } %>
+                            <% end %>
+                          </div>
+                          <% if match.completed? && match.winner_id == teams.second.participant_id %>
+                            <div class="winner">
+                              <div>Winner</div>
+                              <%= winner_standing(match, teams.second) %>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% else %>
+        <%= render partial: 'matches/starting_soon' %>
+      <% end %>
+    </div>
+  </div>
+<% end %> 

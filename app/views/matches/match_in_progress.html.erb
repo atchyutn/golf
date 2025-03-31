@@ -1,0 +1,35 @@
+<div class="matchesWrap">
+    <div class="container maxWidth888">
+        <%= render partial: 'layouts/tabs', locals: { match_started: true, page: ''} %>
+        <div class="row justify-content-center">
+            <div class="col-md-6 pageHeight d-flex align-items-center">
+                <div class="card">
+                    <% scores = HoleScore.where(user_id: current_user.id, match_id: @match.id) %>
+                    <% if scores.where(confirmed: true).present? %>
+                        <h2 class="text-start">Scorecard submitted</h2>
+                    <% else %>
+                        <h2 class="text-start">Match In Progress</h2>
+                    <% end %>
+                    <% if current_user.captain? %>
+                        <% if scores.where(confirmed: true).present? %>
+                            <p>Scorecard submitted. You will be asked to resubmit your scorecard if the home team captain edits any of the confirmed scores.<br>Please check the tournament standings to track your progress.</p>
+                        <% else %>
+                            <p>We recommend that you keep track of the score in a physical scorecard as a backup. You will be asked to verify the score once the match has finished. </p>
+                        <% end %>
+                        <div class="buttonsWrap">
+                            <% if ((@match.early_win) || (@match.home_course.holes_count <= scores.pluck(:hole_number).uniq.count)) && (scores.where(confirmed: false).present?) %>
+                                <%= link_to "Review Score Card", match_summary_path(id: @match.id), class: "btn greenBtn" %>
+                            <% end %>
+                        </div>
+                    <% else %>
+                        <% if scores.where(confirmed: true).present? %>
+                            <p>Your scorecard has been submitted by your team captain. Please check the tournament standings to track your progress.</p>
+                        <% else %>
+                            <p>Your scorecard will be submitted by your team captain once the match has finished.</p>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

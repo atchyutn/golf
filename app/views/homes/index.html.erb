@@ -1,0 +1,113 @@
+<section class="banner">
+  <%= image_tag 'bannerImg.png', alt: '', class: 'bg' %>
+  <div class="inner">
+    <div class="sub">View your matches here</div>
+    <h1 class="title" id="context-content">All matches</h1>
+  </div>
+</section>
+<div class="matchesWrap">
+  <div class="container maxWidth888">
+    <%= render partial: 'layouts/tabs', locals: { active_class: 'active', page: 'match', match_started: false } %>
+    <% if !current_user.team.completed? %>
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="card statusMsg">
+            <div class="msgWrap">
+              <i class="bx bx-info-circle"></i>
+              <div class="info">
+                <div class="title">Your Payment has not been updated! Please contact admin</div>
+              </div>
+            </div>
+            <%
+=begin%>
+ <%= form_with url: create_checkout_session_path, method: :post, class: "pay-now-form", data: { turbo: false } do |form| %>
+              <%= form.submit "Pay now", class: "btn btnSmall greenBtn" %>
+            <% end %> 
+<%
+=end%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <div class="container-fluid mobilePad0">
+      <% if current_user.nil? %>
+        <div class="alert alert-warning">No current user found</div>
+      <% elsif current_user.team.nil? %>
+        <div class="row justify-content-center">
+          <div class="col-12 maxWidth444">
+            <div class="card statusMsg">
+              <div class="msgWrap mb-0">
+                <div class="info text-center">
+                  <div class="title">You must invite a second player from the Team tab </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <% if @upcoming_matches.any? %>
+          <h2 class="sectionTitle">Upcoming Matches</h2>
+          <% @upcoming_matches.each do |match| %>
+            <div class="card">
+              <%= render partial: 'matches/match_information', locals: { key: 'upcoming', key_match: match, display_text: true } %>
+              <%= render partial: 'matches/upcoming_teams', locals: { const: 1, key_match: match, match_info: false } %>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="row justify-content-center">
+            <div class="col-12 maxWidth444">
+              <div class="card soonCard">
+                <h2>Tournament has not started yet</h2>
+                <p>Ensure your profile is completed. You can invite a teammate and reserves if you have not already done so.</p>
+              <a href="team.html" class="btn whiteBtn">Setup your team</a>
+            </div>
+          </div>
+        </div>
+        <% end %>
+
+        <% if @match_started_matches.any? %>
+          <h2 class="sectionTitle">Started Matches</h2>
+          <% @match_started_matches.each do |match| %>
+            <div class="card">
+              <%= render partial: 'matches/match_information', locals: { key: 'match_started', key_match: match, display_text: true } %>
+            </div>
+          <% end %>
+        <% else %>
+        <% end %>
+
+        <% if @completed_matches.any? %>
+          <h2 class="sectionTitle">Completed Matches</h2>
+          <% @completed_matches.each do |match| %>
+            <div class="card">
+              <%= render partial: 'matches/match_information', locals: { key: 'completed', key_match: match, display_text: true } %>
+              <div class="teamWrap completed">
+                <div class="row teamRow">
+                  <% match.teams.each_with_index do |team, index| %>
+                    <div class="team col-12 col-md-6">
+                      <div class="teamName">Team <%= index + 1 %><% if current_user.team == team %><span class="tag home">Home</span><% end %></div>
+                      <div class="box">
+                        <div class="left">
+                          <% team.players.select { |p| !p.reserved_player? }.each do |player| %>
+                            <div class="profilePic">
+                              <%= image_tag(player.image.attached? ? player.image : 'profile-pic-1.jpeg', alt: '') %>
+                            </div>
+                          <% end %>
+                          <div class="info me-auto">
+                            <% team.players.select { |p| !p.reserved_player? }.each do |player| %>
+                              <div class="name"><%= player.full_name %></div>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

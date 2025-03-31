@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Hello, <%= @player.full_name %></h1>
+    <p>We have an important announcement regarding your upcoming match.</p>
+    <p><strong>Match ID:</strong> <%= @match.match_id %></p>
+    <p><strong>Match Round:</strong> <%= @match.round %></p>
+    <p><strong>Match Time:</strong> <%= @match.match_time %></p>
+    <% if @match.started? %>
+      <h3>Match has started!</h3>
+    <% end %>
+  </body>
+</html>

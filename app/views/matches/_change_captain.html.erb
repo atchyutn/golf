@@ -1,0 +1,40 @@
+<div
+	class="modal fade"
+	id="changeCaptain"
+	tabindex="-1"
+	aria-labelledby="changeCaptainLabel"
+	aria-hidden="true"
+>
+	<div class="modal-dialog modal-dialog-centered">
+	<div class="modal-content">
+		<div class="modal-header">
+		<div class="left">
+			<h5 class="modal-title" id="changeCaptainLabel">
+			Change captain
+			</h5>
+			<div class="sub">Select a temporary captain for this match</div>
+		</div>
+		<button
+			type="button"
+			class="btn-close"
+			data-bs-dismiss="modal"
+			aria-label="Close"
+		></button>
+		</div>
+		<%= form_with model: current_user.team, url: team_path, method: :put, remote: true do |f| %>
+			<div class="modal-body">
+				<!-- Home course select -->
+				<div class="mb-4">
+					<%= f.select(:captain, current_user.team.players.where.not(id: current_user.id).map { |user|
+					  image_url = user.image.attached? ? user.image.url : image_path('profile-pic-1.jpeg')
+					  [user.full_name, user.id, { 'data-src': image_url }]
+					}, {}, { class: 'form-control custom' }) %>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<%= f.submit 'Save', class: 'btn greenBtn', id: 'change-captain' %>
+			</div>
+		<% end %>
+	</div>
+	</div>
+</div>

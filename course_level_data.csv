@@ -1,0 +1,17 @@
+course_id,facility_name,facility_id,course_name,holes,par,course_type,course_architect,open_date,guest_policy,weekday_price,weekend_price,twilight_price,fairway,green,currency
+GBR-ESS-0067-01,Langdon Hills Golf Club,GBR-ESS-0067,Langdon,9,35,Parkland,Sandow,N/D,Open,22,30,22,N/D,N/D,GBP
+GBR-ESS-0067-02,Langdon Hills Golf Club,GBR-ESS-0067,Horndon,9,37,Parkland,Sandow,N/D,Open,18,25,18,N/D,N/D,GBP
+GBR-ESS-0067-03,Langdon Hills Golf Club,GBR-ESS-0067,Bulphan,9,36,Parkland,Sandow,N/D,Open,18,25,18,N/D,N/D,GBP
+GBR-ESS-0067-04,Langdon Hills Golf Club,GBR-ESS-0067,Bulphan/Horndon,18,73,Parkland,Sandow,N/D,Open,18,25,18,N/D,N/D,GBP
+GBR-ESS-0067-05,Langdon Hills Golf Club,GBR-ESS-0067,Horndon/Langdon,18,71,Parkland,Sandow,N/D,Open,18,25,18,N/D,N/D,GBP
+GBR-ESS-0067-06,Langdon Hills Golf Club,GBR-ESS-0067,Langdon/Bulphan,18,72,Parkland,Sandow,N/D,Open,18,25,18,N/D,N/D,GBP
+GBR-CMA-0034-01,Windermere Golf Club,GBR-CMA-0034,Windermere,18,67,Links,George Lowe,1891,Open,15,15,15,N/D,N/D,GBP
+GBR-BDF-0027-01,The Millbrook Golf Club,GBR-BDF-0027,The Millbrook,18,72,Parkland,William Sutherland,1980,Open,35,40,34,N/D,N/D,GBP
+GBR-BDF-0017-01,John O'Gaunt Golf Club,GBR-BDF-0017,John O'Gaunt,18,71,Parkland,Hawtree Ltd,1948,Open,30,35,30,N/D,N/D,GBP
+GBR-BDF-0017-02,John O'Gaunt Golf Club,GBR-BDF-0017,Carthagena,18,69,Parkland,Hawtree Ltd,1948,Open,25,30,25,N/D,N/D,GBP
+GBR-SYK-0001-01,Bawtry Golf Club,GBR-SYK-0001,Bawtry,18,73,Parkland,N/D,N/D,Open,20,25,18,N/D,N/D,GBP
+GBR-TOF-0001-01,Greenmeadow Golf and Country Club,GBR-TOF-0001,Green Meadows,18,70,Parkland,Peter Richardson,1981,Open,21,21,10,N/D,N/D,GBP
+GBR-TWR-0001-01,Heworth Golf Club,GBR-TWR-0001,Heworth,18,71,Parkland,N/D,1912,Open,20,20,20,N/D,N/D,GBP
+GBR-TYR-0009-01,Clogher Valley Golf Club,GBR-TYR-0009,Clogher Valley,9,34,Links,N/D,2000,Open,10,12,10,N/D,N/D,GBP
+GBR-VGL-0001-01,Brynhill Golf Club,GBR-VGL-0001,Brynhill,18,72,Parkland,"Ted Ray, R- DaveThomas Ltd",1921,Open,25,30,25,N/D,N/D,GBP
+GBR-WAR-0001-01,Forest of Arden-Aylesford Golf Club,GBR-WAR-0001,Forest of Arden-Aylesford,18,69,Parkland,Donald Steel,N/D,Open,40,45,40,N/D,N/D,GBP

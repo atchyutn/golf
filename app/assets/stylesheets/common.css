@@ -1,0 +1,295 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+body {
+  background: #f5f5f5;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  color: #000;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bg-dark {
+  background-color: #141414 !important;
+}
+
+.navbar-dark {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.navbar-dark .navbar-brand {
+  margin-left: 8px;
+}
+.navbar-dark .navbar-nav {
+  padding: 20px 0 24px;
+}
+.navbar-dark .navbar-nav .nav-item {
+  margin-right: 16px;
+}
+.navbar-dark .navbar-nav .nav-link {
+  padding: 12px 16px;
+  color: #ffffff;
+}
+.navbar-dark .rightMenu {
+  justify-content: end;
+}
+.navbar-dark .profileWrap {
+  margin-right: 36px;
+}
+.navbar-dark a.profilePic {
+  height: 40px;
+  width: 40px;
+  overflow: hidden;
+  display: block;
+}
+.navbar-dark a.profilePic img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+/* Message Notification */
+.notification {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 50%;
+  padding: 10px;
+  background-color: deepskyblue;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon {
+  font-size: 2rem;
+}
+.message {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.badge {
+  background: #ff3b3b;
+  color: white;
+  border-radius: 50%;
+  padding: 8px 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+
+.btn {
+  border-radius: 50px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  font-weight: 600;
+  display: flex;
+  font-size: 16.8px;
+  line-height: 20px;
+}
+
+.btn-primary {
+  color: #141414;
+  background-color: #00f1c8;
+  border-color: #00f1c8;
+}
+
+input.calendar {
+  background: #f9fafb url("images/calendar.svg") no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 24px 24px;
+}
+
+.modal-content {
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  border: none;
+}
+.modal-content .modal-header {
+  padding: 0 0 24px;
+  border-bottom: 1px solid #d0d5dd;
+  margin-bottom: 24px;
+}
+.modal-content .modal-header h5 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+}
+.modal-content .modal-header .sub {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.modal-content .modal-body {
+  padding: 0;
+}
+.modal-content .modal-footer {
+  padding: 0;
+  border-top: none;
+  justify-content: flex-start;
+}
+.modal-content .btn-close {
+  opacity: 1;
+}
+.modal-content .btn {
+  padding: 13px 64px;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000;
+  margin-bottom: 8px;
+}
+.modal-content .btn.btnSmall {
+  padding: 7px 32px;
+}
+.modal-content .btn.whiteBtn {
+  background: #fff;
+  border: 1px solid #d0d5dd;
+}
+.modal-content .btn.greenBtn {
+  background: #00f1c8;
+}
+.modal-content .btn.greenBtn:hover {
+  background: #00cdaa;
+}
+.modal-content .btn.iconBtn {
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.modal-content .btn.iconBtn .bx {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.modal-backdrop.show {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+.select2-dropdown {
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background-color: #f9fafb;
+}
+
+.select2-container--default .select2-selection--single {
+  background-color: #f9fafb;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  padding: 9px 13px;
+  font-size: 16px;
+  line-height: 24px;
+  min-height: 44px;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  display: none;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 24px;
+  padding-left: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered > span {
+  display: flex;
+  align-items: flex-start;
+}
+
+.img-flag {
+  height: 24px;
+  width: 24px;
+  display: block;
+  margin-right: 8px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.select2-results__option {
+  padding: 9px 14px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000;
+}
+.select2-results__option span {
+  display: flex;
+  align-items: flex-start;
+}
+
+.modal-body .select2-container {
+  width: 100% !important;
+}
+
+.select2-container {
+  z-index: 1061;
+}
+/* 
+#notifications {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 50%;
+  padding: 10px;
+  background-color: deepskyblue;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+@media (max-width: 1200px) {
+  .navbar-dark .navbar-nav .nav-item {
+    margin-right: 0;
+  }
+}
+@media (max-width: 991px) {
+  .navbar-dark {
+    padding: 20px 0;
+  }
+  .navbar-dark .navbar-toggler {
+    color: rgb(255, 255, 255);
+    border: none;
+  }
+  .navbar-brand img {
+    height: 40px;
+  }
+  .signUpWrap .signupCard .mainTitle {
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+}
+@media (min-width: 1201px) {
+  .maxWidth888 {
+    max-width: 912px;
+  }
+  .maxWidth1024 {
+    max-width: 1048px;
+  }
+}/*# sourceMappingURL=common.css.map */

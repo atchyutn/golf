@@ -1,0 +1,26 @@
+<div class="row justify-content-center">
+  <div class="col-12">
+    <div class="innerNav">
+      <ul class="nav navLeft">
+        <li>
+          <%= link_to 'Matches', root_path, class: ('active' if page == 'match') %>
+        </li>
+        <li>
+          <%= link_to 'Team', teams_path, class: ('active' if page == 'team'), onclick: "window.location.href = this.href; return false;" %>
+        </li>
+        <li>
+          <%= link_to 'Profile', edit_user_registration_path, class: ('active' if page == 'profile') %>
+        </li>
+      </ul>
+      <ul class="nav navRight d-none d-md-block">
+        <li>
+          <% if match_started.present? && current_user.team.matches.started.any? %>
+            <%= link_to 'Match in progress', upcoming_matches_path(id: current_user.team.matches.started.first.id), class: 'active' %>
+          <% else %>
+           <%= link_to "Tournament Standing", upcoming_matches_path, class: 'nav-link', onclick: "window.location.href = this.href; return false;" %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

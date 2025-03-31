@@ -1,0 +1,2 @@
+<%= turbo_stream.append "messages", partial: "messages/message", locals: { message: @message, current_user: current_user } %>
+<%= turbo_stream.replace "message_form", partial: "messages/form", locals: { chat_room: @chat_room, message: @chat_room.messages.new } %>

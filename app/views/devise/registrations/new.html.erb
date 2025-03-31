@@ -1,0 +1,42 @@
+
+<div class="signUpWrap signUpBg">
+  <div class="container">
+    <div class="row">
+      <%= form_for(resource, as: resource_name, url: personal_information_path, method: :get) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="col-xl-5 col-lg-8 col-md-12">
+          <div class="signupCard">
+            <div class="avatarTrustWrap">
+              <div class="avatars">
+                <div class="avatar"></div>
+                <div class="avatar"></div>
+                <div class="avatar"></div>
+                <div class="avatar"></div>
+                <!-- Add your avatar images here -->
+              </div>
+              <p class="trustedText">Trusted by 5000+ players worldwide</p>
+            </div>
+            <h1 class="mainTitle">
+              Join the most <br />exciting amateur <br />tournament of 2024
+            </h1>
+            <p class="entryFee">£240 entry fee per person</p>
+            
+            <div class="emailSignup">
+            <%= f.email_field :email, autofocus: true, class: 'emailInput', placeholder: "Type your Email here!", autocomplete: "email" %>
+              <% if params[:invitation_id] %>
+                <%= f.hidden_field :invite_id, value: params[:invitation_id] %>
+              <% end %>
+              
+            <%= f.submit :value => "Sign up for free", :class => 'signupBtn' %>
+          </div>
+          <% if flash[:alert].present? %>
+            <div class="alert alert-danger p-1 px-3">
+              <%= flash[:alert] %>
+            </div>
+            <% end %>
+      <% end %>
+      </div>
+    </div>
+</div>
+</div>
+</div>

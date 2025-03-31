@@ -1,0 +1,7 @@
+<% if @provider == "google" %>
+  <%= render partial: 'devise/registrations/form', locals: { form_url: update_personal_information_path, form_method: :put, email: @email, invite_id: @invite_id, provider: @provider } %>
+<% else %>
+  <%= render partial: 'devise/registrations/form', locals: { form_url: registration_path(resource_name), form_method: :post, email: @email, invite_id: @invite_id } %>
+<% end %>
+
+<%= render "devise/shared/links" %>

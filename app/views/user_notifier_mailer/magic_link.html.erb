@@ -1,0 +1,14 @@
+<h1>Hi <%= @user.first_name %></h1>
+
+<div>
+  <p>Here is your magic link for quickly signing in to Sportingly</p>
+</div>
+<div>
+  <% if @user.active %>
+    <%= link_to "Sign In now", sign_in_with_magic_link_url(user: @user, invite_id: @invite_id) %>
+  <% elsif @provider.present? %>
+    <%= link_to "Sign Up now", personal_information_url(email: @user.email, provider: @provider) %>
+  <% else %>
+    <%= link_to "Sign Up now", sign_up_with_magic_link_url(email: @user.email) %>
+  <% end %>
+</div>

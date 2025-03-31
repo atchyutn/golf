@@ -1,0 +1,39 @@
+/* body {
+  background: red;
+} */
+.pageHeight {
+  height: calc(100vh - 222px);
+}
+.matchesWrap .card {
+  border: 1px solid #d0d5dd !important;
+}
+.tournamentsWrap .round .matchesWrap .matchWrap {
+  /* min-height: 144px;
+  background: #d0d5dd; */
+}
+.tournamentsWrap .round .matchesWrap .matchWrap .team {
+  min-height: 72px;
+}
+.tournamentsWrap .round .matchesWrap.totalTeams1::before {
+  display: none;
+}
+.winner-title {
+    display: inline-block;
+    background-color: #00f1c8;
+    padding: 5px 15px;
+    color: #000000;
+    font-weight: bold;
+    border-radius: 8px;
+    margin: 0 auto;
+    text-align: center;
+}
+.loser-title{
+  display: inline-block;
+  background-color: #ffd4d4;
+  padding: 5px 15px;
+  color: #000000;
+  font-weight: bold;
+  border-radius: 8px;
+  margin: 0 auto;
+  text-align: center;
+}

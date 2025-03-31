@@ -1,0 +1,6 @@
+en:
+  admin:
+    actions:
+      start:
+        menu: "Start Tournament"
+        title: "Start tournament"

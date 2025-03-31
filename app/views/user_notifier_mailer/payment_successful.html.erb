@@ -1,0 +1,9 @@
+<h1>
+	Payment successful
+</h1>
+<p>
+	Hi <%= @user.full_name %>
+</p>
+<p>
+	You have successfully registered for "<%= Tournament.find_by(url: ENV['TOURNAMENT']).name %>" tournament 
+</p>

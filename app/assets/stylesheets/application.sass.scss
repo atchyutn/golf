@@ -1,0 +1,59 @@
+// Entry point for your Sass build
+// Form container
+.devise-form-container {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    // Form header
+    .devise-form-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    // Form input fields
+    input.devise-form-input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+
+        &:focus {
+            outline: none;
+            border-color: #007bff; // Highlight border color on focus
+        }
+    }
+
+    // Form submit button
+    button.devise-form-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+
+    // Link for switching between sign-in and sign-up
+    a.devise-form-switch-link {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        color: #007bff;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

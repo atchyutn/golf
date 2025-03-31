@@ -1,0 +1,1061 @@
+<div class="matchesWrap">
+  <div class="container maxWidth888">
+  	<%= render partial: 'layouts/tabs', locals: { match_started: true, page: ''} %>
+    <div class="sectionTitle">Score Summary</div>
+  	<div class="teams-container">
+  <% const = 1 %>
+  <% max_val = @match.teams.maximum(:final_standing) %>
+  <% @match.teams.order(id: :asc).each.with_index do |team, index| %>
+    <div class="team-row">
+      <div class="team-info">
+        <div class="avatar-container">
+          <% captains = team.players.select { |player| player.captain? } %>
+          <% regular_players = team.players.select { |player| player.player? } %>
+          <% (captains + regular_players).each do |player| %>
+            <% unless player.reserved_player? %>
+              <div class="player-avatars">
+                <% if player.image.attached? %>
+                  <%= image_tag player.image, class: "team-avatar" %>
+                <% else %>
+                  <%= image_tag 'profile-pic-1.jpeg', alt: player.full_name, class: "team-avatar" %>
+                <% end %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="player-details">
+          <% (captains + regular_players).each do |player| %>
+            <% unless player.reserved_player? %>
+              <p><%= player.full_name %>, <%= player.handicap %> hcp</p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="team-label <%= const == 1 ? 'text-success' : 'text-primary' %>">Team <%= const %></div>
+      <div class="team-status up"><span> <%= current_hole_standing(@match, team, (index == 0 ? 'team1' : 'team2')) %></span></div>
+    </div>
+    <% const += 1 %>
+  <% end %>
+</div>
+  </div>
+
+	<div class="container maxWidth888 score-card">
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="tab-btn active" data-tab="front">Front 9</button>
+    <button class="tab-btn" data-tab="back">Back 9</button>
+  </div>
+
+  <!-- Front 9 Section -->
+  <div id="scorecard-front">
+    <div class="tableWrap noPadding">
+      <table class="table bordered">
+        <thead>
+          <tr>
+            <th>Hole</th>
+            <%= generate_hole_columns(@match.home_course, 1, 9) %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Par (M | F)</th>
+            <%= generate_cells(@match, 'Par', 1, 9) %>
+          </tr>
+          <tr>
+            <th>SI (M | F)</th>
+            <%= generate_cells(@match, 'Handicap', 1, 9) %>
+          </tr>
+          <% const = 1 %>
+          <% @match.teams.order(id: :asc).each do |team| %>
+            <tr>
+              <th style="color: <%= const == 1 ? 'blue' : 'red' %>;">Team <%= const %></th>
+              <td colspan="9"></td>
+            </tr>
+            <% captains = team.players.select { |player| player.captain? } %>
+            <% regular_players = team.players.select { |player| player.player? } %>
+            <% reserved_players = team.players.select { |player| player.reserved_player? } %>
+            <% (captains + regular_players).each do |player| %>
+              <tr>
+                <th style="color: <%= const == 1 ? 'blue' : 'red' %>;"><%= "#{player.full_name} - fhcp: (#{@match.course_handicaps.find_by(user_id: player.id)&.final_handicap.to_i})" %></th>
+                <%= generate_shot_cells(player, @match, 1, 9) %>
+              </tr>
+              <tr>
+                <th style="color: <%= const == 1 ? 'blue' : 'red' %>;">Scores</th>
+                <%= generate_score_cells(player, @match, 1, 9) %>
+              </tr>
+            <% end %>
+            <% const += 1 %>
+          <% end %>
+          <tr>
+            <th>Standings</th>
+            <%= current_standing(@match, 1, 9) %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Back 9 Section -->
+  <div id="scorecard-back" style="display: none;">
+    <div class="tableWrap noPadding">
+      <table class="table bordered">
+        <thead>
+          <tr>
+            <th>Hole</th>
+            <%= generate_hole_columns(@match.home_course, 10, 18) %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Par (M | F)</th>
+            <%= generate_cells(@match, 'Par', 10, 18) %>
+          </tr>
+          <tr>
+            <th>SI (M | F)</th>
+            <%= generate_cells(@match, 'Handicap', 10, 18) %>
+          </tr>
+          <% const = 1 %>
+          <% @match.teams.order(id: :asc).each do |team| %>
+            <tr>
+              <th style="color: <%= const == 1 ? 'blue' : 'red' %>;">Team <%= const %></th>
+              <td colspan="9"></td>
+            </tr>
+            <% captains = team.players.select { |player| player.captain? } %>
+            <% regular_players = team.players.select { |player| player.player? } %>
+            <% reserved_players = team.players.select { |player| player.reserved_player? } %>
+            <% (captains + regular_players).each do |player| %>
+              <tr>
+                <th style="color: <%= const == 1 ? 'blue' : 'red' %>;"><%= "#{player.full_name} - fhcp: (#{@match.course_handicaps.find_by(user_id: player.id)&.final_handicap.to_i})" %></th>
+                <%= generate_shot_cells(player, @match, 10, 18) %>
+              </tr>
+              <tr>
+                <th style="color: <%= const == 1 ? 'blue' : 'red' %>;"><%= "Scores" %></th>
+                <%= generate_score_cells(player, @match, 10, 18) %>
+              </tr>
+            <% end %>
+            <% const += 1 %>
+          <% end %>
+          <tr>
+            <th>Standings</th>
+            <%= current_standing(@match, 10, 18) %>
+          </tr>
+        </tbody>
+      </table>
+      <% if @winner %>
+        <p class="early-win"><%= @winner %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+		<div class="container buttonsWrap justify-content-center maxWidth888">
+			<% if current_user.captain? && current_user.team.home %>
+				<%= link_to "Edit", edit_scores_path(id: @match.id), class: "btn whiteBtn", onclick: "window.location.href = this.href; return false;" %>
+				<!-- Simple direct approach -->
+      <button type="button" class="btn greenBtn" id="show-modal-btn">Submit scores</button>
+
+      <!-- Hidden form for actual submission -->
+      <form action="/matches/<%= @match.id %>/final_scores" method="post" id="final-scores-form" style="display: none;">
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <input type="submit" id="actual-submit">
+      </form>
+			<% else %>
+				<%= form_with model: @match, url: confirm_score_path, method: :put do |f| %>
+					<%= hidden_field_tag :id, @match.id %>
+					<%= hidden_field_tag :confirmed, true %>
+					<div>
+						<%= f.submit "Confirm score", class: "btn greenBtn" %>
+					</div>
+				<% end %>
+			<% end %>
+  	</div>
+  </div>
+<!-- Modal Structure -->
+<div class="modal fade score-card-modal" id="scoreConfirmationModal" tabindex="-1" aria-labelledby="scoreConfirmationModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="matchInfoModalLabel">
+          <!-- Will be filled dynamically -->
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="avatar-container justify-content-center mb-3">
+          <%# Will be filled dynamically %>
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+          <div class="team-status up">
+            <!-- Will be filled dynamically -->
+          </div>
+        </div>
+        <div class="modal-desc mb-4">
+          <p>
+            <!-- Will be filled dynamically -->
+          </p>
+          <p>Please review and submit your scorecard.</p>
+          <p>
+            The opposing team captain will be asked to verify the scorecard.
+          </p>
+          <p>
+            Once verified, the scorecard will be registered and the match
+            will conclude.
+          </p>
+        </div>
+        <div class="d-flex justify-content-center">
+          <% begin %>
+          <button id="submit-final-scores" class="btn btn-primary">Review and submit</button> 
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Enhanced score submission handler
+  document.querySelector('.submit-scores')?.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Show the modal
+    const modal = new bootstrap.Modal(document.getElementById('scoreConfirmationModal'));
+    modal.show();
+  });
+
+  // Keep existing form submission handler
+  document.getElementById('confirm-submission')?.addEventListener('click', function() {
+    document.getElementById('score-submission-form').submit();
+  });
+});
+</script>
+<style type="text/css">
+	.redText {
+		color: #dd4040;
+	}
+
+	.blueText {
+		color: #0416b4;
+	}
+	.early-win {
+	    text-align: right;
+	    font-size: 1.2em;
+	    color: #a100ff;
+	    font-weight: bold;
+	    padding: 10px;
+	    margin-top: 20px;
+	    border-radius: 5px;
+	    margin-right: 74px;
+	    margin-top: -33px;
+	}
+	.draw_message {
+	    color: #fd9000;
+	    text-align: center;
+	}
+	.tableWrap .table.bordered {
+		  margin-left: 25px;
+	}
+</style>
+
+<style>
+.modal-title{
+	text-align: center;
+}
+
+@import "variables";
+
+// Utility functions to access variables
+@function color($name) {
+  @return map-get($colors, $name);
+}
+
+@function spacing($name) {
+  @return map-get($spacing, $name);
+}
+
+@function font-size($name) {
+  @return map-get($font-sizes, $name);
+}
+
+// Header
+.scorecard-header {
+  padding: spacing("sm") 0;
+
+  h1 {
+    font-size: font-size("sm");
+    font-weight: 700;
+    margin-bottom: 0;
+  }
+}
+
+// Teams container
+// .teams-container {
+//   padding: spacing("sm") spacing("md");
+// }
+
+.team-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: spacing("sm");
+  border: 1px solid color("border-gray");
+  border-radius: 8px;
+  margin-bottom: spacing("sm");
+  background-color: color("white");
+  &:last-child {
+    margin-bottom: spacing("md");
+  }
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  .avatar-container {
+    margin-right: 1rem;
+  }
+}
+.avatar-container {
+  display: flex;
+  position: relative;
+  .player-avatars {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    &:last-child {
+      margin-left: -1.5rem;
+    }
+  }
+}
+
+.player-details {
+  p {
+    margin: 0;
+    font-size: font-size("sm");
+
+    &:first-child {
+      font-weight: 500;
+    }
+  }
+}
+
+.team-label {
+  color: color("grey-text");
+  margin-right: spacing("md");
+}
+
+.team-status {
+  padding: spacing("xs") spacing("sm");
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: font-size("sm");
+
+  &.up {
+    background-color: color("site-green");
+    color: color("white");
+  }
+}
+
+// Navigation tabs
+.nav-tabs {
+  display: flex;
+  border: none;
+  padding: 0 spacing("md");
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: spacing("sm");
+}
+
+.tab-btn {
+  padding: spacing("sm") spacing("lg");
+  border: 1px solid color("border-gray");
+  font-size: font-size("base");
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  color: color("dark-black");
+  background-color: color("white");
+  border-radius: 10px;
+
+  &.active {
+    color: color("black");
+    background-color: color("black");
+    color: color("white");
+  }
+}
+
+// Scorecard table
+.scorecard-table {
+  //   border: 1px solid color("border-gray");
+  background-color: color("white");
+  overflow-x: auto;
+  //   border-radius: 8px;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: font-size("sm");
+  }
+  tr {
+    border-color: color("border-gray");
+  }
+  th,
+  td {
+    text-align: center;
+    padding: 5px;
+    position: relative;
+    border-color: color("border-gray");
+    background-color: color("white");
+    font-weight: 600;
+  }
+
+  th:first-child,
+  td:first-child {
+    text-align: left;
+  }
+}
+
+.header-row th {
+  font-weight: 600;
+  padding-bottom: spacing("sm");
+}
+
+// .par-row,
+// .hcp-row {
+//   border-bottom: 1px solid color("border-gray");
+// }
+
+.team-header {
+  background-color: #f9f9f9;
+  font-weight: 500;
+
+  td {
+    padding: spacing("xs") spacing("sm");
+    text-align: left;
+
+    &:first-child {
+      color: color("site-green");
+    }
+
+    &:last-child {
+      color: color("blue");
+    }
+  }
+}
+
+.player-row {
+  //   td {
+  //     border-bottom: 1px solid #f0f0f0;
+  //   }
+
+  &.team1 td:first-child {
+    color: color("site-green");
+  }
+
+  &.team2 td:first-child {
+    color: color("blue");
+  }
+}
+
+.team1 .win-cell {
+  background-color: color("site-green");
+  color: color("white");
+}
+
+.team2 .win-cell {
+  background-color: color("blue");
+  color: color("white");
+}
+
+.stroke-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: color("black");
+  border-radius: 50%;
+  top: 4px;
+  right: 4px;
+}
+
+.status-row {
+  td {
+    font-size: font-size("xs");
+    font-weight: 500;
+
+    &:nth-child(even) {
+      color: color("site-green");
+    }
+
+    &:nth-child(odd) {
+      color: color("blue");
+    }
+  }
+}
+
+// Legend
+.legend {
+  display: flex;
+  align-items: center;
+  padding: spacing("sm") spacing("md");
+  font-size: font-size("xs");
+  color: color("grey-text");
+
+  .stroke-dot {
+    position: static;
+    display: inline-block;
+    margin-right: spacing("xs");
+  }
+}
+
+// Action buttons
+.action-buttons {
+  display: flex;
+  padding: spacing("md");
+  gap: spacing("md");
+}
+
+.btn {
+  padding: spacing("sm") spacing("lg");
+  border-radius: 24px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  font-size: font-size("base");
+
+  &.btn-primary {
+    background-color: color("site-green");
+    color: color("white");
+
+    &:hover {
+      background-color: color("site-green-hover");
+    }
+  }
+
+  &.btn-secondary {
+    background-color: color("white");
+    color: color("black");
+    border: 1px solid color("border-gray");
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+}
+
+.table-bordered {
+  display: none;
+
+  &.active {
+    display: table;
+  }
+}
+
+.score-card {
+	td {
+		width: 10%;
+	}
+}
+
+.score-card-modal {
+  .modal-header {
+    justify-content: center;
+    border: none;
+    padding: 0;
+    h5 {
+      font-size: font-size("xl");
+      font-weight: 700;
+      text-align: center;
+    }
+  }
+  .team-status {
+    padding: 13px spacing("md");
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: font-size("2xl");
+    display: inline-flex;
+    align-items: center;
+    flex-direction: column;
+    line-height: 1;
+    span {
+      font-size: font-size("sm");
+    }
+    &.up {
+      background-color: color("site-green");
+      color: color("white");
+    }
+  }
+  .modal-desc {
+    p {
+      text-align: center;
+      font-size: font-size("base");
+      font-weight: 500;
+    }
+  }
+}
+
+.scorecard-header {
+  padding: 8px 0;
+}
+.scorecard-header h1 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.team-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background-color: #ffffff;
+}
+.team-row:last-child {
+  margin-bottom: 16px;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.team-info .avatar-container {
+  margin-right: 1rem;
+}
+
+.avatar-container {
+  display: flex;
+  position: relative;
+}
+.avatar-container .player-avatars {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avatar-container .player-avatars img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.avatar-container .player-avatars:last-child {
+  margin-left: -1.5rem;
+}
+
+.player-details p {
+  margin: 0;
+  font-size: 14px;
+}
+.player-details p:first-child {
+  font-weight: 500;
+}
+
+.team-label {
+  color: #6a6669;
+  margin-right: 16px;
+}
+
+.team-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 14px;
+}
+.team-status.up {
+  background-color: #64bd59;
+  color: #ffffff;
+}
+
+.nav-tabs {
+  display: flex;
+  border: none;
+  padding: 0 16px;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.tab-btn {
+  padding: 8px 24px;
+  border: 1px solid #d0d5dd;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+.tab-btn.active {
+  color: #141414;
+  background-color: #141414;
+  color: #ffffff;
+}
+
+.scorecard-table {
+  background-color: #ffffff;
+  overflow-x: auto;
+}
+.scorecard-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.scorecard-table tr {
+  border-color: #d0d5dd;
+}
+.scorecard-table th,
+.scorecard-table td {
+  text-align: center;
+  padding: 5px;
+  position: relative;
+  border-color: #d0d5dd;
+  background-color: #ffffff;
+  font-weight: 600;
+}
+.scorecard-table th:first-child,
+.scorecard-table td:first-child {
+  text-align: left;
+}
+
+.header-row th {
+  font-weight: 600;
+  padding-bottom: 8px;
+}
+
+.team-header {
+  background-color: #f9f9f9;
+  font-weight: 500;
+}
+.team-header td {
+  padding: 4px 8px;
+  text-align: left;
+}
+.team-header td:first-child {
+  color: #64bd59;
+}
+.team-header td:last-child {
+  color: #0416b4;
+}
+
+.player-row.team1 td:first-child {
+  color: #64bd59;
+}
+.player-row.team2 td:first-child {
+  color: #0416b4;
+}
+
+.team1 .win-cell {
+  background-color: #64bd59;
+  color: #ffffff;
+}
+
+.team2 .win-cell {
+  background-color: #0416b4;
+  color: #ffffff;
+}
+
+.stroke-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #141414;
+  border-radius: 50%;
+  top: 4px;
+  right: 4px;
+}
+
+.status-row td {
+  font-size: 12px;
+  font-weight: 500;
+}
+.status-row td:nth-child(even) {
+  color: #64bd59;
+}
+.status-row td:nth-child(odd) {
+  color: #0416b4;
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  font-size: 12px;
+  color: #6a6669;
+}
+.legend .stroke-dot {
+  position: static;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.action-buttons {
+  display: flex;
+  padding: 16px;
+  gap: 16px;
+}
+
+.btn {
+  padding: 8px 24px;
+  border-radius: 24px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  flex: 1;
+  font-size: 16px;
+}
+.btn.btn-primary {
+  background-color: #64bd59;
+  color: #ffffff;
+}
+.btn.btn-primary:hover {
+  background-color: #64bd59;
+}
+.btn.btn-secondary {
+  background-color: #ffffff;
+  color: #141414;
+  border: 1px solid #d0d5dd;
+}
+.btn.btn-secondary:hover {
+  background-color: #f5f5f5;
+}
+
+.table-bordered {
+  display: none;
+}
+.table-bordered.active {
+  display: table;
+}
+
+.score-card-modal .modal-header {
+  justify-content: center;
+  border: none;
+  padding: 0;
+  padding-left: 90px;
+}
+.score-card-modal .modal-header h5 {
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+}
+.score-card-modal .team-status {
+  padding: 13px 16px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 32px;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: column;
+  line-height: 1;
+}
+.score-card-modal .team-status span {
+  font-size: 14px;
+}
+.score-card-modal .team-status.up {
+  background-color: #64bd59;
+  color: #ffffff;
+}
+.score-card-modal .modal-desc p {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+
+
+# Scorecard CSS
+
+/* Navigation Tabs */
+.nav-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  border: 1px solid #d0d5dd;
+  background-color: #ffffff;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 0 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab-btn.active {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+/* Hide Back 9 Section by Default */
+#scorecard-back {
+  display: none;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const tabButtons = document.querySelectorAll(".tab-btn");
+  const frontSection = document.getElementById("scorecard-front");
+  const backSection = document.getElementById("scorecard-back");
+
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      // Remove active class from all buttons
+      tabButtons.forEach((btn) => btn.classList.remove("active"));
+
+      // Add active class to the clicked button
+      button.classList.add("active");
+
+      // Show/hide sections based on the selected tab
+      const tab = button.getAttribute("data-tab");
+      if (tab === "front") {
+        frontSection.style.display = "block";
+        backSection.style.display = "none";
+      } else if (tab === "back") {
+        frontSection.style.display = "none";
+        backSection.style.display = "block";
+      }
+    });
+  });
+});  
+
+
+// Add a simple debug function to log what's happening
+function logToConsole(message) {
+  console.log(`[DEBUG] ${new Date().toISOString()}: ${message}`);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Log for debugging
+  console.log('DOM content loaded, setting up handlers');
+  
+  // Get the button and form elements
+  const showModalBtn = document.getElementById('show-modal-btn');
+  const form = document.getElementById('final-scores-form');
+  
+  if (showModalBtn && form) {
+    console.log('Found show-modal-btn and final-scores-form');
+    
+    // Add click handler to the show modal button
+    showModalBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      console.log('Show modal button clicked');
+      
+      // Instead of just showing the modal, let's make the AJAX request directly
+      // This ensures we get the data before showing the modal
+      const matchId = form.action.split('/')[4].split('.')[0]; // Extract match ID from form action
+      const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+      
+      console.log(`Making AJAX request to get winner data for match ID: ${matchId}`);
+      
+      // Use fetch API for the request
+      fetch(`/matches/${matchId}/final_scores`, {
+        method: 'PUT',
+        headers: {
+          'X-CSRF-Token': csrfToken,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        console.log(`Response status: ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Data received from controller:', data);
+        
+        // Update modal with winner data
+        updateModalWithData(data);
+        
+        // Now show the modal with the updated data
+        const modal = new bootstrap.Modal(document.getElementById('scoreConfirmationModal'));
+        modal.show();
+        console.log('Modal shown with winner data');
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        // Show modal anyway, but without data
+        const modal = new bootstrap.Modal(document.getElementById('scoreConfirmationModal'));
+        modal.show();
+      });
+    });
+  }
+  
+  function updateModalWithData(data) {
+    console.log('Updating modal with data:', data);
+    
+    // Update modal title
+    document.querySelector('#scoreConfirmationModal .modal-title').textContent = "We have a winner!";
+    
+    // Clear and update avatar container
+    const avatarContainer = document.querySelector('#scoreConfirmationModal .avatar-container');
+    if (avatarContainer && data.winner && data.winner.players) {
+      avatarContainer.innerHTML = '';
+      
+      data.winner.players.forEach(player => {
+        const avatarHTML = `
+          <div class="player-avatars">
+            <img src="${player.image_url || '/assets/profile-pic-1.jpesg'}" class="avatar" />
+          </div>
+        `;
+        avatarContainer.insertAdjacentHTML('beforeend', avatarHTML);
+      });
+    }
+    
+    // Update team status with scores
+    const teamStatusDiv = document.querySelector('#scoreConfirmationModal .team-status');
+    if (teamStatusDiv) {
+      teamStatusDiv.innerHTML = `
+        ${data.standing}&${data.remaining_holes} <span>Winner</span>
+      `;
+    }
+    
+    // Update description
+    const modalDesc = document.querySelector('#scoreConfirmationModal .modal-desc');
+    if (modalDesc && data.winner && data.winner.players && data.winner.players.length >= 2) {
+      modalDesc.innerHTML = `
+        <p><b>${data.winner.players[0].full_name}</b> and <b>${data.winner.players[1].full_name}</b> win the match.</p>
+        <p>Please review and submit your scorecard.</p>
+        <p>The opposing team captain will be asked to verify the scorecard.</p>
+        <p>Once verified, the scorecard will be registered and the match will conclude.</p>
+      `;
+    }
+  }
+  
+  // Add direct event listener for the submit button in the modal
+  const submitFinalScoresBtn = document.getElementById('submit-final-scores');
+  if (submitFinalScoresBtn && form) {
+    console.log('Found submit-final-scores button');
+    
+    submitFinalScoresBtn.addEventListener('click', function() {
+      console.log('Submit final scores button clicked - redirecting to match summary');
+      // Instead of submitting the form, redirect to the match summary page
+      window.location.href = `/matches/${form.action.split('/')[4].split('.')[0]}/match_summary`;
+    });
+  }
+});
+
+// The controller response will handle updating the modal with data
+</script>

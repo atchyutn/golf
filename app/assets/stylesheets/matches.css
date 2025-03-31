@@ -1,0 +1,771 @@
+.banner {
+  min-height: 250px;
+  position: relative;
+  /* background: rgba(0, 0, 0, 0.1); */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner img.bg {
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  position: relative;
+  height: 100%;
+  top: 0;
+  z-index: 1;
+  margin: 10px;
+  border-radius: 20px;
+}
+.banner::after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  /* background: rgba(0, 0, 0, 0.1); */
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  z-index: 0;
+}
+.banner .inner {
+  position: relative;
+  z-index: 1;
+  display: none;
+  flex-direction: column;
+  text-align: center;
+}
+.banner .sub {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 27px;
+  color: #00f1c8;
+}
+.banner h1.title {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 39.01px;
+  color: #fff;
+}
+
+.maxWidth444 {
+  max-width: 468px;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  text-align: center;
+  margin: 20px 0 24px;
+}
+.sectionTitle:first-of-type {
+  margin-top: 0;
+}
+
+.matchesWrap {
+  padding: 20px 0;
+}
+.matchesWrap .innerNav {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #64bd59;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.matchesWrap .innerNav ul.nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.matchesWrap .innerNav ul.nav li a {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  padding: 12px 40px;
+  opacity: 70%;
+  color: #000;
+  display: block;
+  text-decoration: none;
+}
+.matchesWrap .innerNav ul.nav li a:hover {
+  opacity: 1;
+  color: #000000;
+}
+.matchesWrap .innerNav ul.nav li a.active {
+  color: #ffffff;
+  background: #000000;
+  opacity: 1;
+  border-radius: 8px;
+}
+.matchesWrap .innerNav ul.nav li a.active:hover {
+  background: #64bd59;
+}
+.matchesWrap .innerNav ul.nav.navRight li a.active {
+  /* background: linear-gradient(92.47deg, #00f1c8 0%, #008b73 100%); */
+  background: #64bd59;
+}
+.matchesWrap .card {
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  border-radius: 16px;
+  background: #fff;
+  padding: 24px;
+  border: none;
+  margin-bottom: 24px;
+}
+.matchesWrap .card.soonCard {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.matchesWrap .card .iconBox {
+  height: 48px;
+  width: 48px;
+  background: #00f1c8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.matchesWrap .card .iconBox .icon {
+  height: 24px;
+  width: 24px;
+}
+.matchesWrap .card h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.matchesWrap .card p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  margin-bottom: 24px;
+}
+.matchesWrap .card.statusMsg {
+  border: 1px solid #d0d5dd;
+  padding: 12px;
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22.4px;
+  margin-bottom: 24px;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  box-shadow: none;
+}
+.matchesWrap .card.statusMsg .title {
+  font-weight: 700;
+  color: #dd4040;
+}
+.matchesWrap .card.statusMsg p {
+  margin-bottom: 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+.matchesWrap .card.statusMsg .bx {
+  font-size: 24px;
+  color: #dd4040;
+  margin-right: 16px;
+}
+.matchesWrap .card.statusMsg .msgWrap {
+  display: flex;
+  align-items: center;
+}
+.matchesWrap .card.statusMsg .btn {
+  margin-bottom: 0;
+}
+.matchesWrap .card .playBy {
+  background: rgba(208, 213, 221, 0.3019607843);
+  padding: 6px 10px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-self: flex-start;
+  border-radius: 6px;
+}
+.matchesWrap .card .cardHeader {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #d0d5dd;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  align-items: center;
+  width: 100%;
+}
+.matchesWrap .card .cardHeader.timePlace {
+  display: block;
+}
+.matchesWrap .card .cardHeader.notHeader {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.matchesWrap .card .cardHeader h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+  margin-bottom: 0;
+}
+.matchesWrap .card .cardHeader h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 0;
+  line-height: 30px;
+}
+.matchesWrap .card .cardHeader .btn {
+  margin-bottom: 0;
+}
+.matchesWrap .card .cardHeader .left {
+  display: flex;
+  align-items: center;
+}
+.matchesWrap .card .cardHeader .left .info .name {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+}
+.matchesWrap .card .cardHeader .left .info .email,
+.matchesWrap .card .cardHeader .left .info .sub {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 22.5px;
+  opacity: 0.7;
+}
+.matchesWrap .card .cardHeader .left .info .sub {
+  font-size: 16px;
+}
+.matchesWrap .card .cardHeader .profilePic {
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+  margin-right: 16px;
+  flex-shrink: 0;
+  position: relative;
+  border-radius: 50%;
+}
+.matchesWrap .card .cardHeader .profilePic img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  height: 80px;
+  width: 80px;
+}
+.matchesWrap .card .cardHeader .profilePic input[type="file"] {
+  display: none;
+}
+.matchesWrap .card .cardHeader .profilePic .custom-file-upload {
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  font-size: 32px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.2);
+  transition: opacity 0.25s ease-in-out;
+}
+.matchesWrap .card .cardHeader .profilePic:hover .custom-file-upload {
+  opacity: 1;
+}
+.matchesWrap .card .cardHeader.profileHeader {
+  padding-bottom: 24px;
+}
+.matchesWrap .card .cardHeader .textWithIcon {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.matchesWrap .card .cardHeader .textWithIcon .iconWrap {
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.0509803922);
+  border: 1px solid #d0d5dd;
+  height: 38px;
+  width: 38px;
+  border-radius: 50%;
+  font-size: 24px;
+  text-align: center;
+  line-height: 38px;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+.matchesWrap .card .cardHeader .textWithIcon .text {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+}
+.matchesWrap .card .cardHeader + .cardHeader,
+.matchesWrap .card .cardHeader + .playBy + .cardHeader {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.matchesWrap .teamWrap {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22.4px;
+}
+.matchesWrap .teamWrap .teamRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.matchesWrap .teamWrap .teamRow .team {
+  position: relative;
+}
+.matchesWrap .teamWrap .teamRow .team a.edit {
+  color: #141414;
+  text-decoration: none;
+  font-size: 18px;
+  position: absolute;
+  top: 0;
+  right: 12px;
+}
+.matchesWrap .teamWrap .teamRow .team .teamName {
+  padding-bottom: 4px;
+}
+.matchesWrap .teamWrap .teamRow .team .invite {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+.matchesWrap .teamWrap .teamRow .team .box {
+  background: #fbfffe;
+  border: 1px solid #d0d5dd;
+  padding: 11px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+.matchesWrap .teamWrap .teamRow .team .box .left {
+  display: flex;
+  margin-right: auto;
+  align-items: center;
+}
+.matchesWrap .teamWrap .teamRow .team .profilePic {
+  height: 48px;
+  width: 48px;
+  overflow: hidden;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+.matchesWrap .teamWrap .teamRow .team .profilePic img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+}
+.matchesWrap .teamWrap .teamRow .team .hcp {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+}
+.matchesWrap .teamWrap .teamRow .team .tag {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  padding: 4px 12px 5px;
+  border-radius: 15px;
+  height: 30px;
+}
+.matchesWrap .teamWrap .teamRow .team .tag.captain {
+  background: rgba(0, 241, 200, 0.2);
+}
+.matchesWrap .teamWrap.upcoming .teamName {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 21px;
+}
+.matchesWrap .teamWrap.upcoming .teamName .tag {
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  padding: 4px 12px 5px;
+  margin-left: 12px;
+}
+.matchesWrap .teamWrap.upcoming .teamName .tag.home {
+  background: #000;
+  color: #fff;
+}
+.matchesWrap .teamWrap.completed .teamRow .team .teamName {
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 4px;
+  font-weight: 600;
+  padding: 0;
+}
+.matchesWrap .teamWrap.completed .teamRow .team .profilePic {
+  margin-right: 0;
+}
+.matchesWrap .teamWrap.completed .teamRow .team .profilePic + .profilePic {
+  margin-left: -20px;
+  margin-right: 16px;
+}
+.matchesWrap .teamWrap.completed .teamRow .team .up2 {
+  min-width: 56px;
+  min-height: 56px;
+  padding: 4px 4px;
+  background: #00f1c8;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.2px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.matchesWrap .teamWrap.completed .teamRow .team .up2 span {
+  font-size: 24px;
+  line-height: 28.8px;
+}
+.matchesWrap .teamWrap.upcoming .teamRow .team .box,
+.matchesWrap .teamWrap.completed .teamRow .team .box {
+  min-height: 80px;
+  padding: 11px 15px;
+}
+.matchesWrap .teamWrap.upcoming .teamRow .team .box.mobile,
+.matchesWrap .teamWrap.completed .teamRow .team .box.mobile {
+  padding: 0;
+  height: auto;
+  min-height: unset;
+  overflow: hidden;
+}
+.matchesWrap .teamWrap.upcoming .teamRow .team .box.mobile .info,
+.matchesWrap .teamWrap.completed .teamRow .team .box.mobile .info {
+  padding: 8px 15px;
+}
+.matchesWrap .teamWrap.upcoming .teamRow .team .box.mobile .up2,
+.matchesWrap .teamWrap.completed .teamRow .team .box.mobile .up2 {
+  border-radius: 8px 0 0 8px;
+}
+.matchesWrap .teamWrap.upcoming .teamRow .team .box.mobile .winner + .up2,
+.matchesWrap .teamWrap.completed .teamRow .team .box.mobile .winner + .up2 {
+  border-radius: 0 8px 8px 0;
+}
+.matchesWrap .teamWrap.upcoming .teamRow .team .box.mobile .winner,
+.matchesWrap .teamWrap.completed .teamRow .team .box.mobile .winner {
+  background: #00f1c8;
+}
+.matchesWrap .teamInfoWrap .teamInfoHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.matchesWrap .teamInfoWrap .teamInfoHead .teamName {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 700;
+}
+.matchesWrap .teamInfoWrap .teamInfoHead .teamName .tag {
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  padding: 4px 12px 5px;
+  margin-left: 12px;
+}
+.matchesWrap .teamInfoWrap .teamInfoHead .teamName .tag.home {
+  background: #000;
+  color: #fff;
+}
+.matchesWrap .teamInfoWrap .teamInfoHead .btn {
+  margin-bottom: 0;
+}
+.matchesWrap .teamInfoWrap .box {
+  background: #fbfffe;
+  border: 1px solid #d0d5dd;
+  padding: 15px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22.4px;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  margin-bottom: 24px;
+}
+.matchesWrap .teamInfoWrap .box .top {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #d0d5dd;
+  margin-bottom: 16px;
+}
+.matchesWrap .teamInfoWrap .box .left {
+  display: flex;
+  margin-right: auto;
+  align-items: center;
+}
+.matchesWrap .teamInfoWrap .box .title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  margin-bottom: 8px;
+}
+.matchesWrap .teamInfoWrap .box .contactLinks {
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+}
+.matchesWrap .teamInfoWrap .box .contactLinks a.icon {
+  height: 40px;
+  width: 40px;
+  border: 1px solid rgb(208, 213, 221);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  font-size: 24px;
+  line-height: 38px;
+  text-align: center;
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  padding: 0;
+}
+.matchesWrap .teamInfoWrap .box .contactLinks a.icon:hover {
+  background: rgb(208, 213, 221);
+}
+.matchesWrap .teamInfoWrap .profilePic {
+  height: 48px;
+  width: 48px;
+  overflow: hidden;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+.matchesWrap .teamInfoWrap .profilePic img {
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+}
+.matchesWrap .teamInfoWrap .hcp {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+}
+.matchesWrap .teamInfoWrap .tag {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  padding: 4px 12px 5px;
+  border-radius: 15px;
+  height: 30px;
+}
+.matchesWrap .teamInfoWrap .tag.captain {
+  background: rgba(0, 241, 200, 0.2);
+}
+.matchesWrap .confirmTeamWrap {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: left;
+}
+.matchesWrap .buttonsWrap {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+}
+.matchesWrap .btn {
+  padding: 13px 145px;
+  border-radius: 24px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000;
+  margin-bottom: 8px;
+}
+.matchesWrap .btn.btnSmall {
+  padding: 7px 32px;
+}
+.matchesWrap .btn.whiteBtn {
+  background: #fff;
+  border: 1px solid #d0d5dd;
+  height: 50px;
+}
+.matchesWrap .btn.whiteBtn:hover {
+  background: #d0d5dd;
+}
+.matchesWrap .btn.greenBtn {
+  background: #64bd59;
+}
+.matchesWrap .btn.greenBtn:hover {
+  background: #64bd59;
+}
+.matchesWrap .btn.iconBtn {
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+.matchesWrap .btn.iconBtn .bx {
+  font-size: 20px;
+  margin-right: 8px;
+}
+.matchesWrap .startMatch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0 32px;
+}
+.matchesWrap .startMatch .title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 30px;
+}
+.matchesWrap .startMatch .btn {
+  margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .banner .sub {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .banner h1.title {
+    font-size: 24px;
+    line-height: 29.26px;
+  }
+  .matchesWrap .innerNav {
+    padding: 8px;
+  }
+  .matchesWrap .innerNav ul.nav {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .matchesWrap .innerNav ul.nav li a {
+    padding: 12px 26px;
+    color: #fff;
+  }
+  .matchesWrap .card.statusMsg {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px;
+  }
+  .matchesWrap .card.statusMsg .msgWrap {
+    margin-bottom: 16px;
+  }
+  .matchesWrap .card.statusMsg .msgWrap .info {
+    text-align: left;
+  }
+  .matchesWrap .card .cardHeader {
+    padding-bottom: 25px;
+  }
+  .matchesWrap .card .cardHeader.profileHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .matchesWrap .card .cardHeader.profileHeader .left {
+    margin-bottom: 16px;
+  }
+  .matchesWrap .teamWrap .teamRow {
+    flex-direction: column;
+    margin-bottom: 8px;
+  }
+  .matchesWrap .teamWrap .teamRow .team {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  .matchesWrap .teamWrap .teamRow .team .box {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .matchesWrap .teamWrap .teamRow .team .box .tag {
+    margin-bottom: 16px;
+  }
+  .matchesWrap .btn {
+    padding: 13px 31px;
+  }
+  .matchesWrap .card .playBy {
+    margin-bottom: 8px;
+  }
+  .matchesWrap .card .cardHeader .textWithIcon {
+    margin-bottom: 8px;
+  }
+  .matchesWrap .card .cardHeader.timePlace {
+    padding-bottom: 16px;
+  }
+  .matchesWrap .upcoming .buttonsWrap,
+  .matchesWrap .completed .buttonsWrap {
+    display: block;
+  }
+  .teamWrap.completed .name {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .matchesWrap .teamWrap.completed .teamRow .team .profilePic + .profilePic {
+    margin-right: 12px;
+  }
+  .matchesWrap .teamWrap.completed .teamRow .team .box {
+    flex-direction: row;
+    align-items: center;
+  }
+  .matchesWrap .teamInfoWrap .box {
+    margin-bottom: 16px;
+  }
+  .matchesWrap .teamInfoWrap .teamInfoRow {
+    margin-bottom: 8px;
+  }
+  .matchesWrap .teamInfoWrap .teamInfoHead {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .matchesWrap .teamInfoWrap .teamInfoHead .btn {
+    margin-bottom: 10px;
+  }
+  .matchesWrap .teamInfoWrap .box .top {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .matchesWrap .teamInfoWrap .tag.captain {
+    margin-bottom: 16px;
+  }
+  .matchesWrap .startMatch {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .matchesWrap .startMatch .title {
+    margin-bottom: 16px;
+  }
+} /*# sourceMappingURL=matches.css.map */
+
+.badge {
+  background-color: #fff;
+  color: #ff3b30;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-left: 8px;
+}

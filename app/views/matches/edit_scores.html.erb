@@ -1,0 +1,99 @@
+<div class="matchesWrap">
+  <div class="container maxWidth888">
+    <%= render partial: 'layouts/tabs', locals: { match_started: true, page: ''} %>
+    <div class="sectionTitle">Score Summary</div>
+    <div class="teamWrap completed">
+      <div class="row teamRow">
+        <% const = 1 %>
+        <% @match.teams.order(id: :asc).each do |team| %>
+          <div class="team col-12 col-md-6">
+            <div class="teamName <%= const == 1 ? "redText" : "blueText" %>">Team <%= const %></div>
+            <div class="box">
+              <div class="left">
+                <% captains = team.players.select { |player| player.captain? } %>
+                <% regular_players = team.players.select { |player| player.player? } %>
+                <% (captains + regular_players).each do |player| %>
+                  <div class="profilePic">
+                    <% if player.image.attached? %>
+                      <%= image_tag player.image, alt: "" %>
+                    <% else %>
+                      <%= image_tag "profile-pic-1.jpeg", alt: "" %>
+                    <% end %>
+                  </div>
+                <% end %>
+                <div class="info me-auto">
+                  <% team.players.only_players.each do |player| %>
+                    <div class="name"><%= player.full_name %></div>
+                  <% end %>
+                </div>
+              </div>
+              <% max_val = @match.teams.maximum(:final_standing) %>
+              <%= render partial: 'teams/current_standing', locals: { max_val: ,team:, match: @match } %>
+            </div>
+          </div>
+          <% const += 1 %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="container maxWidth1024">
+    <%= form_with model: @match, url: submit_scores_path, method: :post, id: "matchScoreForm", data: { turbo: false } do |f| %>
+      <div class="holeSlider">
+        <% completion_status = hole_completion_status(@match) %>
+        <% (1..(@match&.home_course&.holes_count || 18)).each do |hole_number| %>
+          <div>
+            <div class="box <%= 'completed' if completion_status[hole_number] %>">
+              <div class="title">Hole</div>
+              <div class="numb"><%= hole_number %></div>
+            </div>
+          </div>
+        <% end %>
+        <div id="slider-container" data-initial-slide="<%= @initial_slide %>"></div>
+      </div>
+      <div class="row teamScoreWrap">
+        <% const = 1 %>
+          <% @match.teams.order(id: :asc).each do |team| %>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="teamName">Team <%= const %></div>
+                <% captains = team.players.select { |player| player.captain? } %>
+                <% regular_players = team.players.select { |player| player.player? } %>
+                <% (captains + regular_players).each do |player| %>
+                  <div class="box">
+                    <div class="left">
+                      <div class="profilePic">
+                        <% if player.image.attached? %>
+                          <%= image_tag player.image, alt: "" %>
+                        <% else %>
+                          <%= image_tag "profile-pic-1.jpeg", alt: "" %>
+                        <% end %>
+                      </div>
+                      <div class="info me-auto">
+                        <div class="name"><%= player.full_name %></div>
+                        <div class="hcp">Hcp: <%= player.handicap %></div>
+                      </div>
+                    </div>
+                    <%= f.hidden_field :"team_#{team.id}_player_#{player.id}_id", value: player.id %>
+                      <%= f.text_field :"team_#{team.id}_player_#{player.id}", class: "form-control score", id: "score-#{player.id}", required: true, min: 1 %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <% const += 1 %>
+          <% end %>
+      </div>
+      <%= f.hidden_field :current_hole_number, id: "current-hole-number", data: { total_holes: @match.home_course.holes } %>
+      <%= hidden_field_tag :id, @match.id %>
+      <strong><div class="invalidScores" style="color: red;text-align: center;padding-bottom: 10px;"></div></strong>
+      <div class="buttonsWrap justify-content-center">
+        <%= f.submit "Enter Scores", class: "btn greenBtn submit-score-card", data: { turbo: false } %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<style>
+  .isInvalid{
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+</style>

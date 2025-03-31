@@ -1,0 +1,80 @@
+<% if current_user.captain? %>
+  <div class="matchesWrap">
+    <div class="container maxWidth888">
+    	<%= render partial: 'layouts/tabs', locals: { match_started: true, page: ''} %>
+		<div class="card">
+      <div class="cardHeader profileHeader">
+        <div class="left">
+          <div class="info">
+            <div class="name">Round <%= @match.round %></div>
+            <div class="sub"><%= @match.cohors.name %></div>
+          </div>
+        </div>
+      </div>
+      <%= render partial: 'matches/match_information', locals: { key: @match.status, key_match: @match, display_text: false } %>
+    </div>
+		<%= render partial: 'matches/edit_tee_handicap', locals: { match: @match } %>
+    	<div class="card">
+			<div class="cardHeader">
+            <div class="left">
+              <h3>Confirm team information</h3>
+            </div>
+          </div>
+    		<div class="teamInfoWrap">
+    		 <%= form_with(url: update_team_path(match_id: @match), method: :put) do |f| %>
+    		   <% const = 1 %>
+    		   <% @match.teams.each do |team| %>
+			   <div class="teamInfoHead">
+					<div class="teamName">
+						Team <%= const %><% if team.home %><span class="tag home">Home</span><% end %>
+					</div>
+				</div>
+    		     <div class="row teamInfoRow">
+    		     		<% temp = 1 %>
+                <% team_short(team).each do |player| %>
+    		         <% unless player.reserved_player? %>
+    		         	<div class="col-12 col-md-6 team">
+    		         	<div class="mb-4">
+    		         		<%= f.label :"player_#{temp}", class:'form-label'  %>
+    		         		<%= f.hidden_field :"team_#{const}_id", value: team.id %>
+    		         		<%= f.select(:"team_#{const}_player_#{temp}", options_for_select(team.players.map { |user|
+                        image_url = user.image.attached? ? user.image.url : image_path('profile-pic-1.jpeg')
+                        [user.full_name, user.id, { 'data-src': image_url }]
+    		         		            }, selected: player.id), { include_blank: 'Player' }, { class: 'form-control custom' }) %>
+    		         		<% temp += 1 %>
+    		         	</div>
+    		         	</div>
+    		         <% end %>
+    		       <% end %>
+    		     </div>
+    		     <% const += 1 %>
+    		   <% end %>
+			   <div class="buttonsWrap">
+    		   <%= f.submit "Next step", class:"btn greenBtn" %>
+			   </div>
+    		 <% end %>
+    		</div>
+    	</div>
+    </div>
+  </div>
+<% end %>
+
+<style>
+.matchesWrap .buttonsWrap .btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 13px;
+  border-radius: 24px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000;
+  margin-bottom: 8px;
+  background: #64bd59;
+}
+
+.bx{
+	padding: 5px;
+}
+</style>

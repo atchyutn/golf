@@ -1,0 +1,354 @@
+<div id="partial_reload_match_info" >
+  <h2 class="sectionTitle">Next match</h2>
+<!-- Players VS section -->
+<div class="vs-container">
+  <% team1 = @match.teams.first %>
+  <% team2 = @match.teams.second %>
+
+  <div class="player-card">
+    <% if true %>
+      <div class="badge home-captain-badge">
+        Home Team
+      </div>
+    <% end %>
+    <div class="profile-pic">
+      <img src="/assets/profile-pic-1.jpeg" class="avatar" />
+    </div>
+    <div class="player-info">
+      <% team1.players.where(player_type: 'captain').each do |captain| %>
+        <div class="name">
+          <%= "#{captain.full_name}, #{captain.handicap} hcp" %>
+          <i class="bx bx-copyright"></i>
+        </div>
+      <% end %>
+      <% team1.players.where(player_type: 'player').each do |player| %>
+        <div class="name"><%= "#{player.full_name}, #{player.handicap} hcp" %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="vs-text">VS</div>
+
+  <div class="player-card">
+    <div class="profile-pic">
+      <img src="/assets/profile-pic-2.jpeg" class="avatar" />
+    </div>
+    <div class="player-info">
+      <% team2.players.where(player_type: 'captain').each do |captain| %>
+        <div class="name">
+          <%= "#{captain.full_name}, #{captain.handicap} hcp" %>
+          <i class="bx bx-crown"></i>
+        </div>
+      <% end %>
+      <% team2.players.where(player_type: 'player').each do |player| %>
+        <div class="name"><%= "#{player.full_name}, #{player.handicap} hcp" %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+	<div class="startMatch d-flex justify-content-between">
+  <% if current_user.captain? %>
+    <% if start_valid? %>
+      <%= link_to @match.status == "started" ? "Resume Match" : "Start match", team_match_confirmation_path(id: @match.id), class: "btn greenBtn" %>
+    <% else %>
+      <%= link_to "Start match", "#", class: "btn greenBtn disabled", disabled: true %>
+    <% end %>
+  <% end %>
+
+  <% if @match.chat_room.present? %>
+    <div class="chat-room-l btn messages-button">
+      <%= link_to match_chat_room_path(@match, @match.chat_room), class: "btn", onclick: "enterChatRoom()" do %>
+        <i class="bx bx-message-square-detail"></i>
+        Start Chat
+        <%= turbo_stream_from "user_#{current_user.id}_notifications" %>
+        <!-- Live-updating unread count -->
+        <span id="message_unread_count">
+          <% unread_count = @match.unread_message_count_for(current_user) %>
+          <% if unread_count.positive? %>
+            <span class="badge"><%= unread_count %></span>
+          <% end %>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+	<%# Match handicap %>
+	<%
+=begin%>
+ <div class="card">
+		<div class="cardHeader">
+			<div class="left">
+				<h3>Match handicap</h3>
+			</div>
+			<div class="right">
+				<h3><%= current_user.handicap %></h3>
+			</div>
+		</div>
+		<div class="profileWrap">
+		<%= form_with model: @match, url: match_path(@match), method: :put, id: 'match_form', remote: true do |f| %>
+			<%= f.hidden_field :id %> 
+			<%= f.hidden_field :match_time %> 
+			<div class="row">
+				<% if @match.home_course.present? %>
+					<% available_tees = @match.home_course.tees.where("COALESCE(slope_rating, '') != ?", 'N/D') %>
+					<% if available_tees.any? %>
+						<div class="col-12">
+							<div class="row">
+								<% @match.teams.each do |team| %>
+									<div class="col-6 mb-4">
+										<h5 class="mb-3"><%= team.name %></h5>
+										<% team.players.each do |player| %>
+											<div class="row mb-3">
+												<div class="col-md-6">
+													<label class="form-label"><%= player.full_name %></label>
+												</div>
+												<div class="col-md-6">
+													<% current_tee = player.users_tees.find_by(match_id: @match.id)&.tee %>
+													<%= select_tag "player_tees[#{player.id}]", 
+														options_for_select(available_tees.pluck(:name), current_tee&.name),
+														{ include_blank: "Select tee color", class: 'form-select' }
+													%>
+												</div>
+											</div>
+									<% end %>
+								</div>
+							<% end %>
+							</div>
+						</div>
+					<% else %>
+						<div class="col-12">
+							<div class="alert alert-warning">No tees available for this course</div>
+						</div>
+					<% end %>
+				<% else %>
+					<div class="col-12">
+						<div class="alert alert-warning">No home course selected</div>
+					</div>
+				<% end %>
+			</div>
+			<div class="buttonsWrap d-flex justify-content-end">
+				<%= f.submit 'Save', class:"btn greenBtn", id: 'match_handicap_form' %>
+			</div>
+		<% end %>
+		</div>
+	</div> 
+<%
+=end%>
+
+	<%# Match Information %>
+	<div class="card team-info-card">
+		<div class="cardHeader profileHeader">
+			<div class="left">
+				<div class="info">
+				<div class="name">Match information</div>
+				<% if current_user.captain? %>
+					<div class="sub">
+						Please confirm the course with the other team before editing.
+					</div>
+				<% end %>
+				</div>
+			</div>
+			<% if current_user.captain? %>
+				<div class="right">
+				<a
+					href="#"
+					class="btn whiteBtn iconBtn btnSmall edit-match"
+					data-bs-toggle="modal"
+					data-bs-target="#matchInfo"
+				>
+					<i class="bx bx-pencil"></i>
+					Update Date and Home Course</a>
+				</div>
+			<% end %>
+		</div>
+		<%= render partial: 'matches/match_information', locals: { key: @match.status, key_match: @match, display_text: true } %>
+	</div>
+
+
+	<%# Team Info %>
+
+	<div class="card team-info-card">
+		<div class="cardHeader">
+	   <div class="left">
+	     <h3>Team information</h3>
+	   </div>
+	 	</div>
+	 	<% const = 1 %>
+	 	<div class="teamInfoWrap">
+		 	<% @match.teams.each do |team| %>
+		 	  <div class="teamInfoHead">
+		 	    <div class="teamName">
+		 	    	Team <%= const %><% if current_user.team == team %><span class="tag home">Home</span><% end %>
+		 	    </div>
+		 	    <% if current_user.captain? && current_user.team.match_ids.include?(@match.id) && const == 1 %>
+		 		    <a
+		 		      href="#"
+		 		      class="btn whiteBtn iconBtn btnSmall"
+		 		      data-bs-toggle="modal"
+		 		      data-bs-target="#changeCaptain"
+		 		      >
+		 		    <i class="bx bx-analyse"></i>
+		 		    Change captain</a
+		 		      >
+		 	    <% end %>
+		 		<% const += 1 %>
+		 	  </div>
+		 	  <div class="row teamInfoRow">
+		 	  	<% captains = team.players.select { |player| player.captain? } %>
+		 	  	<% regular_players = team.players.select { |player| player.player? } %>
+		 	  	<% reserved_players = team.players.select { |player| player.reserved_player? } %>
+		 	  	<% (captains + regular_players).each do |player| %>
+		 		    <div class="col-12 col-md-6 team">
+		 		      <div class="box">
+		 		        <div class="top">
+		 		          <div class="left">
+		 		            <div class="profilePic">
+		 			            <% if player.image.attached? %>
+		 			            	<%= image_tag player.image %>
+		 			            <% else %>
+												<%= image_tag 'profile-pic-1.jpeg', alt: '' %>
+		 			            <% end %>
+		 			          </div>
+		 		            <div class="info me-auto">
+		 			            <div class="name"><%= player.full_name %></div>
+		 			            <div class="hcp">Hcp: <%= player.handicap %></div>
+		 			          </div>
+		 		          </div>
+		 		          <% if player.present? && player.captain? %>
+										<div class="tag captain">Captain</div>
+		 			        <% end %>
+		 		        </div>
+		 		        <div class="contactInfo">
+		 		          <div class="title">Contact information</div>
+		 		          <div class="contactLinks">
+		 		            <a href="mailto:<%= Rails.application.credentials.dig(:email, :brevo_email) %>" class="icon btn">
+	                    <i class="bx bx-envelope"></i>
+	                  </a>
+ 		                <% if player.phone_number.present? %>
+		 		            	<a href="sms:<%= player.phone_number %>" class="icon btn">
+	 		                  <i class="bx bx-chat"></i>
+	 		                </a>
+		                  <a href="tel:<%= player.phone_number %>" class="icon btn">
+		                    <i class="bx bx-phone"></i>
+		                  </a>
+		                <% end %>
+		 		          </div>
+		 		        </div>
+		 		      </div>
+		 		    </div>
+		 		  <% end %>
+		 	  </div>
+		 	<% end %>
+	 	</div>
+	</div>
+	    <!-- Modal -->
+	<%= render partial: 'matches/edit_match' %>
+	<%= render partial: 'matches/change_captain' %>
+</div>
+
+<style>
+.bx {
+  font-size: 1em;
+  margin: 5px;
+}
+.matchesWrap .messages-button {
+	background-color: #ffcc33;
+	color: #000;
+	font-weight: 600;
+	padding: 0px 0px;
+	border-radius: 30px;
+	/* width: 100%; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	border: 1px solid rgba(0, 0, 0, 0.2509803922);
+	box-shadow: 2px 6px 10px 0px rgba(16, 24, 40, 0.3019607843);
+}
+
+.chat-room-l {
+  display: flex; /* Ensure the chat button aligns well */
+  align-items: center; /* Center the icon and text */
+}
+
+.chat-room-l .badge {
+  margin-left: 5px; /* Space between message text and unread count */
+}
+	.matchesWrap .vs-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+}
+
+.matchesWrap .player-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fbfffe;
+    border: 1px solid #d0d5dd;
+    border-radius: 12px;
+    padding: 15px;
+    width: 45%;
+  position: relative;
+
+}
+
+
+.matchesWrap .profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.matchesWrap .profile-pic img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+}
+
+.matchesWrap .player-info {
+    text-align: center;
+}
+
+.matchesWrap .player-info .name {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.matchesWrap .vs-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+}
+
+.home-captain-badge {
+  position: absolute; 
+  top: 10px; 
+  right: 10px; 
+  background-color: #64bd59; 
+  color: white; 
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
+  z-index: 10; 
+}
+
+.matchesWrap .team-info-card {
+  background-color: #fff;
+  border: 2px solid #4caf50 !important;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+
+</style>
