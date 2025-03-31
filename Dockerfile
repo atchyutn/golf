@@ -75,7 +75,9 @@ Create a `Dockerfile` in your project root:
 FROM ruby:3.2.2
 
 # Install dependencies
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && \
+    apt-get install -y nodejs postgresql-client npm && \
+    npm install -g yarn
 
 # Set working directory
 WORKDIR /app
@@ -88,10 +90,14 @@ RUN bundle install
 COPY . .
 
 # Precompile assets
-RUN bundle exec rails assets:precompile
+RUN bundle exec rails assets:precompile RAILS_ENV=production
 
 # Expose port
 EXPOSE 3000
+
+# Set environment variables
+ENV RAILS_ENV=production
+ENV RAILS_SERVE_STATIC_FILES=true
 
 # Start the server
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
