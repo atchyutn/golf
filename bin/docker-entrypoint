@@ -1,8 +1,17 @@
-#!/bin/bash -e
+#!/bin/bash
+set -e
 
-# If running the rails server then create or migrate existing database
+# If running the rails server, wait for the database to be ready first
 if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare
+  # Wait for database to be ready
+  until nc -z -v -w30 $DATABASE_HOST $DATABASE_PORT; do
+    echo "Waiting for database connection..."
+    sleep 2
+  done
+
+  # Run database migrations
+  ./bin/rails db:migrate
 fi
 
-exec "${@}"
+# Then exec the container's main process (what's set as CMD in the Dockerfile)
+exec "$@"
