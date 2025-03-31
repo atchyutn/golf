@@ -60,3 +60,39 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD ["./bin/rails", "server"]
+
+
+### 2. Set up Coolify
+
+1. Access the Coolify dashboard through your server's IP or domain
+2. Create an account and log in
+3. Set up your server as a resource in Coolify
+
+### 3. Configure your Rails application for Coolify
+
+Create a `Dockerfile` in your project root:
+```dockerfile
+FROM ruby:3.2.2
+
+# Install dependencies
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+
+# Set working directory
+WORKDIR /app
+
+# Copy Gemfile and install dependencies
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# Copy application code
+COPY . .
+
+# Precompile assets
+RUN bundle exec rails assets:precompile
+
+# Expose port
+EXPOSE 3000
+
+# Start the server
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+```
